@@ -18,7 +18,7 @@ cp Testing_Ground/Upload.txt Cloud_Portfolio
  cp ~/Testing_Ground/Upload.txt ~/Cloud_Portfolio 
  ```
 
-# The "Home" Command (~)
+## The "Home" Command (~)
 I deduced that the symbol ~ is a shortcut to always go to the home directory based on how I had to learn "mv" which showed me how to move files from one location to another and came to the realisation that "~" is the home directory due to how I keep needing to place "~" before entering the location of where the file needs to be moved to.
 
 Command | What it does
