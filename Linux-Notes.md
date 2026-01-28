@@ -28,3 +28,29 @@ cd ~ | Brings me directly to the home directory
 
 cd .. | brings me to the previous directory/folder
 ```
+
+---
+## 3. The "Move" / "Rename" Command (mv)
+
+**Scenario** I learned how to rename Linux files by moving them.
+
+```bash
+mv [Old_Name] [New_Name]
+```
+
+> **Warning:** If the destination file exists, Linux will overwrite it without asking/any update (no news is good news)
+
+**Scenario** I learned that (mv) means to move (remember MoVe as a good way to remember it)
+
+```bash
+mv Testing_Ground/Text.txt ~/Cloud_Portfolio
+```
+
+I will need to make sure to include ~/ when keying in the location to send the file to if not there will be an error.
+
+## 4. The "Open VS Code" Command In Ubuntu/WSL2 
+Navigate to the correct folder I want to edit using VS Code using "cd".
+
+**Command:** "code ."
+* Opens VS Code in the current folder. If I do not do it, and just edit the file through VS Code, I will not be able to save my file.
+
