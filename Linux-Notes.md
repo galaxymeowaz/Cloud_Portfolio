@@ -54,3 +54,62 @@ Navigate to the correct folder I want to edit using VS Code using "cd".
 **Command:** "code ."
 * Opens VS Code in the current folder. If I do not do it, and just edit the file through VS Code, I will not be able to save my file.
 
+---
+
+## On 29 January 2026: Learning chmod (Permissions)
+
+I learned how to use "chmod" to secure and assign permissions to different access groups
+
+* **4** = reading permission. ( r ) (r for Read)
+
+* **2** = edit/write permission. (w) (w for Write)
+
+* **1** = execute permission. ( x ) (x for eXecute)
+
+* **0** = no access
+
+After that, it is simple math:
+
+* 4 + 2 = **6** (meaning the access group has permission to read and write)
+
+* 4 + 1 = **6** (meaning the access group has permission to read and execute)
+
+* 2 + 1 = **3** (meaning the access group has permission to edit and execute)
+
+* 4 + 2 + 1 = **7** (meaning the access group has permission to edit, execute and run)
+
+### What I need to remember and the commands to write:
+`chmod [Owner] [Group] [Everyone]`
+
+Understanding what -rw-r--r-- means. 
+
+- "rw" or the first few letters that appear, show that the owner has the permission to read and write.
+
+- "r" which appears after that shows that "group" only has the permission to read.
+
+- "r" that last letter that was displayed, show that everyone else only has the permission to read. 
+
+**Scenario:** I want the "owner" to have permission to view and edit the file, "group" to have permission to read and execute the file and "everyone" to have no permission.
+
+```bash
+chmod 650 secret.txt
+```
+
+What will happen/what it stands for: 
+- 6 (Owner has permission to view and edit the file) 
+- 5 (Group has permissions to execute and to read) 
+- 0 (Everyone else has no access)
+
+To confirm if chmod has ran successfully, key in:
+
+``` bash
+ ls -l secret.txt
+```
+
+If -rw-r-x--- appears, that means that the "owner" has the permission to read and write while "group" has permission to read and execute and "everyone" only has permission to execute.
+
+`chmod 600` will show: -rw------ shows that only the "owner" has permission to read and write, group/everyone else has no permission to do anything.
+
+If I key in `chmod 400` it means I can only view the file, but am unable to edit it. If I enter "nano secret.txt" and try typing, an error will pop up saying [File 'secret.txt' is unwritable]
+
+When "chmod 777" is keyed in, it will mean all three groups have full access to view, edit and execute. (very dangerous)
