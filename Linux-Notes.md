@@ -113,3 +113,13 @@ If -rw-r-x--- appears, that means that the "owner" has the permission to read an
 If I key in `chmod 400` it means I can only view the file, but am unable to edit it. If I enter "nano secret.txt" and try typing, an error will pop up saying [File 'secret.txt' is unwritable]
 
 When "chmod 777" is keyed in, it will mean all three groups have full access to view, edit and execute. (very dangerous)
+
+## 4. 30 January 2026. Automation & CI/CD (GitHub Actions)
+I learned how to automate server tasks using a YAML configuration file.
+- **The Concept** Instead of running commands manually, I write a "recipe" (`deploy.yml`) that instructs a temporary Linux server (`ubuntu-latest`) to execute commands for me.
+- **The Workflow:**
+  1. GitHub spins up an Ubuntu Virtual Machine.
+  2. It installs AWS CLI tools.
+  3. IT runs the command: `aws s3 sync . s3://my-bucket`.
+  4. It runs the command: `aws cloudfront create-invalidation`.
+- **Key Takeaway:** Linux isn't just about typing in a terminal; it's about writing scripts that run on servers automatically.
