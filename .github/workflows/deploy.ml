@@ -21,3 +21,4 @@ jobs:
 
       - name: Deploy to S3 bucket
         run: aws s3 sync . s3://www.aztay.org --delete --exclude ".git/*" --exclude ".github/*"
+        
