@@ -1,4 +1,4 @@
-name: Deploy to S3
+name: Deploy to S3 and Invalidate CloudFront
 
 on:
   push:
@@ -21,4 +21,6 @@ jobs:
 
       - name: Deploy to S3 bucket
         run: aws s3 sync . s3://www.aztay.org --delete --exclude ".git/*" --exclude ".github/*"
-        
+
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
