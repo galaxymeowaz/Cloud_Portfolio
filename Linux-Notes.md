@@ -123,3 +123,18 @@ I learned how to automate server tasks using a YAML configuration file.
   3. IT runs the command: `aws s3 sync . s3://my-bucket`.
   4. It runs the command: `aws cloudfront create-invalidation`.
 - **Key Takeaway:** Linux isn't just about typing in a terminal; it's about writing scripts that run on servers automatically.
+
+## On 31 January 2026. Network & System Utilities
+### Network Inspection (`curl`)
+I learned how to debug web servers directly from the terminal without a browser.
+- **Command:** `curl -I https://www.aztay.org`
+- **Flag:** `-I` (Capital i) fetches only the **Headers** (metadata), not the HTML body.
+- **Why I used it:** To verify if my website was being served by **Amazon CloudFront** or directly by S3.
+- **Key Finding:** I looked for the header `x-cache: Miss from cloudfront` to confirm the CDN was working.
+
+### Input/Output Redirection (`>`)
+I learned how to save terminal output to files.
+- **Command:** `history > log.txt`
+- **Operator:** `>` (The Redirect Operator).
+- **Function:** Instead of printing text to the screen (Standard Output), it sends the text into a file.
+- **Use Case:** I used this to backup my daily command logs for documentation.
