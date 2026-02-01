@@ -138,3 +138,21 @@ I learned how to save terminal output to files.
 - **Operator:** `>` (The Redirect Operator).
 - **Function:** Instead of printing text to the screen (Standard Output), it sends the text into a file.
 - **Use Case:** I used this to backup my daily command logs for documentation.
+
+## On 1 February 2026. Variables & Filtering
+I learned how to manage session data and filter outputs using the **Linux Pipeline**.
+
+### Environment Variables (`export`)
+- **Concept:** Variables allow me to store configuration data (like API keys or region settings) in the shell session, so I don't have to hardcode them.
+- **Command:** `export CLOUD_GOAL="DevOps"` (Creates a variable).
+- **Command:** `echo $CLOUD_GOAL` (Prints the value: "DevOps").
+- **Why it matters:** This is how AWS keys (`AWS_ACCESS_KEY_ID`) are injected into servers securely without writing them in the code.
+
+### The Pipe (`|`) and Search (`grep`)
+- **Concept:** The Pipe operator (`|`) takes the output of the command on the left and feeds it as input to the command on the right.
+- **Command:** `env | grep "GOAL"`
+- **Breakdown:**
+  1. `env`: Lists ALL variables (hundreds of lines).
+  2. `|`: Passes that messy list to the next tool.
+  3. `grep "GOAL"`: Searches for the specific text and discards the rest.
+- **Key Takeaway:** I can combine small tools to solve big problems.
