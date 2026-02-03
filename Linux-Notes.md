@@ -181,3 +181,21 @@ I learned how to modify system behavior using variables.
 - Command: echo $PATH (View the current list).
 - Command: export PATH=$PATH:/new/folder (Appends a new folder to the search list).
 - Why it matters: This is essential when installing new dev tools (like Terraform or Java) that aren't in the default folders.
+
+## On 3 February 2026. Batch Operations & Productivity
+
+While creating multiple iterations of a website that I am hosting on S3, I learned how to manipulate multiple files simultaneously to increase efficiency by thinking that "mv index1.html index2.html ./Old/" should logically be able to move multiple files at the same time. The tests were successful. I thus decided to try other commands to see if they would work similarly such as "touch index1.html index2.html", "rm test.html test2.html" and was able to successfully confirm my theory that commands for move, edit and create multiple files accept lists of files as arguments.
+
+### 1. Multi-File Commands
+- **Command:** `code index.html style.css script.js`
+- **Benefit:** Launches VS Code with all specified files open in tabs instantly, saving manual clicks.
+- **Command:** `mv file1.txt file2.txt ./archive/`
+- **Benefit:** Moves multiple specific files into a folder in a single command.
+
+### 2. Brace Expansion (`{}`)
+I learned how to use `{}` to generate patterns automatically.
+- **Range Expansion:** `touch file{1..5}.txt`
+  - *Result:* Creates `file1.txt`, `file2.txt`, ... up to `file5.txt`.
+- **List Expansion:** `touch app.{html,css,js}`
+  - *Result:* Creates the full web stack (HTML, CSS, JS) for a project in one command.
+- **Why it matters:** This reduces typing errors and speeds up project setup significantly.
