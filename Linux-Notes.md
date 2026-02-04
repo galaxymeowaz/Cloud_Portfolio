@@ -199,3 +199,21 @@ I learned how to use `{}` to generate patterns automatically.
 - **List Expansion:** `touch app.{html,css,js}`
   - *Result:* Creates the full web stack (HTML, CSS, JS) for a project in one command.
 - **Why it matters:** This reduces typing errors and speeds up project setup significantly.
+
+## On 4 February 2026. Project Isolation & Security
+
+While setting up an "Automatic Accountant" Terraform project, I learned how to structure directories and protect sensitive data using Git.
+
+### Directory Management
+- **Command:** `mkdir folder_name` (Make Directory).
+- **Command:** `cd folder_name` (Change Directory).
+- **Concept:** Terraform and Git operate contextually based on the folder I am currently "standing" in. Creating a sub-folder (`automatic-accountant`) keeps the main repository clean.
+
+### The Security Shield (.gitignore)
+- **Concept:** Before writing code, I configured `.gitignore` to strictly exclude secret files.
+- **Pattern:** `*.tfvars` (Ignores any file ending in .tfvars).
+- **Why it matters:** This prevents me from accidentally committing API keys or passwords to GitHub, which is a critical security vulnerability.
+
+### File Compression
+- **Command:** `zip output.zip input.py`
+- **Use Case:** AWS Lambda requires code to be uploaded as a `.zip` file. I learned to compress the Python script directly from the terminal before deployment.
