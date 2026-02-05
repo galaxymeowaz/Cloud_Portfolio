@@ -217,3 +217,23 @@ While setting up an "Automatic Accountant" Terraform project, I learned how to s
 ### File Compression
 - **Command:** `zip output.zip input.py`
 - **Use Case:** AWS Lambda requires code to be uploaded as a `.zip` file. I learned to compress the Python script directly from the terminal before deployment.
+
+## 5 February 2026: Bash Scripting (Automation)
+
+I learned how to write a script to automate repetitive tasks (like creating project folders).
+
+### Key Concepts
+1.  **The Shebang (`#!/bin/bash`):** The first line that tells Linux to use the Bash interpreter.
+2.  **Variables (`$1`):** A placeholder that allows me to input a custom name when running the script.
+    * *Example:* `./script.sh MyProject` -> The code replaces `$1` with `MyProject`.
+3.  **Permissions:** Scripts are not executable by default. I must run `chmod +x scriptname.sh` or `chmod 700` to unlock them.
+
+### My First Script (`project_init.sh`)
+I created a script that automatically:
+1.  Creates a directory.
+2.  Navigates into it.
+3.  Creates a generic README file.
+
+**Usage:**
+```bash
+./project_init.sh [Project_Name]
