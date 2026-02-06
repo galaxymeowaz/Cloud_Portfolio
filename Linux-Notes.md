@@ -237,3 +237,17 @@ I created a script that automatically:
 **Usage:**
 ```bash
 ./project_init.sh [Project_Name]
+
+## 6 February 2026: Grep (Searching Files)
+
+I wanted to learn more about "grep" as I feel like I did not properly grasp it and understood how to fully utilize it. Today, I learnt how to search for specific text inside a file without opening it.
+
+Command:
+grep "text_to_find" filename
+
+Example:
+If I have a log file with thousands of lines, I can instantly find errors:
+```bash
+grep "Error" server_log.txt
+
+
