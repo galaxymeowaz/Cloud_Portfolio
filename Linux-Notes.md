@@ -237,6 +237,7 @@ I created a script that automatically:
 **Usage:**
 ```bash
 ./project_init.sh [Project_Name]
+```
 
 ## 6 February 2026: Grep (Searching Files)
 
@@ -249,6 +250,7 @@ Example:
 If I have a log file with thousands of lines, I can instantly find errors:
 ```bash
 grep "Error" server_log.txt
+``` 
 
 ## 7 February 2026: Piping (Connecting Commands)
 
@@ -263,6 +265,7 @@ Since `history` prints thousands of past commands, I can use a pipe to filter fo
 ```bash
 # Find all previous commands related to "java"
 history | grep "java"
+```
 
 ### Advanced Piping Examples
 
@@ -271,4 +274,4 @@ Instead of reading a long list, I can just count the results.
 ```bash
 # How many "java" commands have I typed?
 history | grep "java" | wc -l
-
+```
