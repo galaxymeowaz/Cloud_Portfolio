@@ -10,7 +10,7 @@
 cp Testing_Ground/Upload.txt Cloud_Portfolio
 ```
 
-* Why it did not succeed: I was already inside Testing_Ground, so the computer could not find a folder named Testing_Ground inside itself. It also did not know where Cloud_Portolio was based on the directory I was in.
+* Why it did not succeed: I was already inside Testing_Ground, so the computer could not find a folder named Testing_Ground inside itself. It also did not know where Cloud_Portfolio was based on the directory I was in.
 
  To fix this, I used the full address (Absolute Path) so the computer knew exactly where to look for both the source and the destination.
 
@@ -250,4 +250,25 @@ If I have a log file with thousands of lines, I can instantly find errors:
 ```bash
 grep "Error" server_log.txt
 
+## 7 February 2026: Piping (Connecting Commands)
+
+I learned more about the Pipe symbol (`|`). It functions like an assembly line: it takes the output of the Left command and passes it as input to the Right command.
+
+**Syntax:**
+`Command_A | Command_B`
+
+**Practical Use Case:**
+Since `history` prints thousands of past commands, I can use a pipe to filter for specific ones (like when I was fixing my Java config):
+
+```bash
+# Find all previous commands related to "java"
+history | grep "java"
+
+### Advanced Piping Examples
+
+**1. Counting Lines (`wc -l`)**
+Instead of reading a long list, I can just count the results.
+```bash
+# How many "java" commands have I typed?
+history | grep "java" | wc -l
 
