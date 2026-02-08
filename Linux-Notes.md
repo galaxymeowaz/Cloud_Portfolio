@@ -275,3 +275,23 @@ Instead of reading a long list, I can just count the results.
 # How many "java" commands have I typed?
 history | grep "java" | wc -l
 ```
+
+## 9 February 2026: Curl (The API Tester)
+
+I learned how to fetch data from the internet directly through the terminal. This is essential for AWS because it allows servers to communicate without a graphical browser.
+
+**Command:** `curl` (Client URL)
+
+**1. Checking Server Health (`-I`)**
+In AWS, I will use this to check if my Load Balancer is active. The `-I` flag fetches just the "Header" (Status) to see if the site is up (Status 200).
+```bash
+curl -I [https://google.com](https://google.com)
+```
+
+**2. Downloading Files (-o) I can download scripts or configuration files directly to my instance.**
+
+```bash
+curl -o myfile.html [https://example.com](https://example.com)
+```
+
+Why this matters for DevOps: This is the primary tool for testing APIs and debugging network connections between microservices.
