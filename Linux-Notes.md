@@ -295,3 +295,16 @@ curl -o myfile.html [https://example.com](https://example.com)
 ```
 
 Why this matters for DevOps: This is the primary tool for testing APIs and debugging network connections between microservices.
+
+## 9 February 2026: Top (System Monitoring)
+
+I learned how to check the health of my system instantly. This is the Linux equivalent of "Task Manager."
+
+**Command:** `top`
+
+**Key Metrics to Watch:**
+1.  **%CPU:** If this is near 100%, the server is overloaded.
+2.  **%MEM:** If this is high, the server is running out of RAM.
+3.  **Load Average:** The 3 numbers at the top right (1 min, 5 min, 15 min averages).
+
+**Exit:** Press `q` to return to the command line.
