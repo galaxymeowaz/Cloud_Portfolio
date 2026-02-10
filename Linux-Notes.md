@@ -308,3 +308,36 @@ I learned how to check the health of my system instantly. This is the Linux equi
 3.  **Load Average:** The 3 numbers at the top right (1 min, 5 min, 15 min averages).
 
 **Exit:** Press `q` to return to the command line.
+
+## On 10 February 2026. Process Management (The Task Manager)
+I learned how to monitor system performance and terminate unresponsive programs manually.
+
+### Monitoring (`top`)
+- **Command:** `top`
+- **Function:** Displays a real-time, dynamic view of the system's running processes.
+- **Key Metrics:**
+  - **PID:** Process ID (The unique number for the program).
+  - **%CPU:** How much processing power it is using.
+  - **%MEM:** How much RAM it is using.
+- **Exit:** Press `q` to quit the dashboard.
+
+### Listing Processes (`ps`)
+- **Command:** `ps aux`
+- **Flags:**
+  - `a`: Show processes for all users.
+  - `u`: Display the process's user/owner.
+  - `x`: Show processes not attached to a terminal (background tasks).
+- **Combo:** `ps aux | grep "python"` (Finds only Python processes).
+
+### Terminating Processes (`kill`)
+- **Command:** `kill [PID]`
+- **Example:** `kill 12345`
+- **Logic:** Sends a specific signal (SIGTERM) to the process ID, telling it to shut down gracefully.
+- **Force Kill:** `kill -9 [PID]` (The "Nuclear Option" – forces the kernel to rip the process out of memory immediately).
+
+### Troubleshooting: The "Grep Trap" & Force Kill
+- **The Grep Trap:** When running `ps aux | grep name`, the search command itself often appears in the results.
+  - *Fix:* Ignore the line that says `grep --color=auto name`. Only kill the line running the actual program.
+- **Force Kill (`-9`):**
+  - **Command:** `kill -9 [PID]`
+  - **Why:** Standard `kill` sends a "Please Stop" signal (SIGTERM). If a program is frozen or stopped (Ctrl+Z), it might ignore this. `-9` sends a "Die Now" signal (SIGKILL) which cannot be ignored.
