@@ -341,3 +341,21 @@ I learned how to monitor system performance and terminate unresponsive programs 
 - **Force Kill (`-9`):**
   - **Command:** `kill -9 [PID]`
   - **Why:** Standard `kill` sends a "Please Stop" signal (SIGTERM). If a program is frozen or stopped (Ctrl+Z), it might ignore this. `-9` sends a "Die Now" signal (SIGKILL) which cannot be ignored.
+
+## On 11 February 2026. Productivity & Environment Customization (`alias`)
+I learned how to create custom command-line shortcuts to speed up my development workflow.
+
+### The `alias` Command
+- **Concept:** `alias` allows me to map a long, complex command to a short, custom keyword. 
+- **Temporary Creation:** `alias tf="terraform"`
+  - *Result:* Typing `tf plan` now executes `terraform plan`.
+- **Viewing Shortcuts:** Typing `alias` by itself lists all currently active shortcuts in the system.
+
+### Permanent Aliases (`.bashrc`)
+- **The Problem:** Aliases created directly in the terminal disappear when the session is closed.
+- **The Solution:** To make them permanent, the alias command must be written into the `~/.bashrc` file. 
+- **How it works:** Every time a new terminal window is opened, Linux reads the `.bashrc` file and loads all the custom settings and aliases into the new session automatically.
+- **My standard aliases:**
+  - `alias gs="git status"`
+  - `alias ga="git add ."`
+  - `alias gc="git commit -m"`
