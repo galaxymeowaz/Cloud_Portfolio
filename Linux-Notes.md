@@ -359,3 +359,22 @@ I learned how to create custom command-line shortcuts to speed up my development
   - `alias gs="git status"`
   - `alias ga="git add ."`
   - `alias gc="git commit -m"`
+
+  ## On 12 February. Secure Access & Identity (`ssh-keygen`)
+I learned how to generate cryptographic keys to authenticate with remote servers (AWS EC2) without using passwords.
+
+### Key Generation
+- **Command:** `ssh-keygen -t rsa -b 4096`
+- **Flags:**
+  - `-t rsa`: Specifies the type of encryption (RSA).
+  - `-b 4096`: Specifies the bit-length (strength) of the key.
+- **Output Location:** Keys are stored in the hidden directory `~/.ssh/`.
+
+### The Key Pair Architecture 
+- **Private Key (`id_rsa`):** The "Key." Kept strictly on the local machine. **NEVER** shared or uploaded.
+- **Public Key (`id_rsa.pub`):** The "Lock." Uploaded to the remote server (e.g., AWS EC2 or GitHub).
+- **Authentication Flow:** The server uses the Public Key to challenge the client; the client proves identity using the Private Key.
+
+### Viewing Keys
+- **Command:** `cat ~/.ssh/id_rsa.pub`
+- **Use Case:** To copy the public key string so it can be pasted into the AWS Console or GitHub Settings.
