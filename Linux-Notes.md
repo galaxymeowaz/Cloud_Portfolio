@@ -378,3 +378,23 @@ I learned how to generate cryptographic keys to authenticate with remote servers
 ### Viewing Keys
 - **Command:** `cat ~/.ssh/id_rsa.pub`
 - **Use Case:** To copy the public key string so it can be pasted into the AWS Console or GitHub Settings.
+
+## On 13 February 2026. History & Search
+I learned how to retrieve and re-execute past commands to increase speed.
+
+### Basic History
+- **Command:** `history`
+- **Function:** Lists previously executed commands with a specific ID number.
+- **Filtering:** `history | grep "search_term"` (Finds specific past commands).
+
+### Re-execution Shortcuts
+- **`!n`:** Executes command number `n` from the history list (e.g., `!502`).
+- **`!!`:** Re-executes the very last command (useful for adding `sudo`, e.g., `sudo !!`).
+
+### Reverse Search (Interactive)
+- **Shortcut:** `Ctrl + R`
+- **Function:** Opens a search mode to find the most recent command matching your input.
+- **Usage:**
+  1. Press `Ctrl + R`.
+  2. Type a keyword (e.g., "git").
+  3. Press `Enter` to run the match, or `Ctrl + R` again to go further back.
