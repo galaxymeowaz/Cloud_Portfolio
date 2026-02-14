@@ -398,3 +398,17 @@ I learned how to retrieve and re-execute past commands to increase speed.
   1. Press `Ctrl + R`.
   2. Type a keyword (e.g., "git").
   3. Press `Enter` to run the match, or `Ctrl + R` again to go further back.
+
+  ## 14 February 2026. Log Monitoring (`tail`)
+I learned how to inspect server logs and monitor files in real-time without opening them.
+
+### Basic Usage
+- **Command:** `tail [file]`
+- **Function:** Outputs the last 10 lines of a file (useful for checking the most recent errors).
+- **Flag `-n`:** `tail -n 20 [file]` (Displays the last 20 lines).
+
+### Real-Time Monitoring (`-f`)
+- **Command:** `tail -f [file]`
+- **Function:** "Follows" the file. The command does not exit; it waits and prints new lines to the screen as they are added to the file.
+- **Use Case:** Watching `var/log/syslog` or application logs while triggering an error to see exactly what happens.
+- **Exit:** `Ctrl + C`.
