@@ -412,3 +412,18 @@ I learned how to inspect server logs and monitor files in real-time without open
 - **Function:** "Follows" the file. The command does not exit; it waits and prints new lines to the screen as they are added to the file.
 - **Use Case:** Watching `var/log/syslog` or application logs while triggering an error to see exactly what happens.
 - **Exit:** `Ctrl + C`.
+
+## On 15 February. Disk Usage Monitoring
+I learned how to analyze storage space to prevent "Disk Full" errors.
+
+### System-Wide Check (`df`)
+- **Command:** `df -h`
+- **Flag `-h`:** "Human-readable" (Converts bytes to KB, MB, GB).
+- **Function:** Displays total available space on the main hard drive (`/dev/root` or `/`).
+
+### Directory-Specific Check (`du`)
+- **Command:** `du -sh [directory]`
+- **Flag `-s`:** "Summary" (Only shows the total for the folder, not every single file inside).
+- **Flag `-h`:** "Human-readable".
+- **Example:** `du -sh .` (Checks size of current folder).
+- **Example:** `du -sh /var/log` (Checks size of the log folder).
