@@ -427,3 +427,21 @@ I learned how to analyze storage space to prevent "Disk Full" errors.
 - **Flag `-h`:** "Human-readable".
 - **Example:** `du -sh .` (Checks size of current folder).
 - **Example:** `du -sh /var/log` (Checks size of the log folder).
+
+## On 16 February 2026. Bulk Permission Fixing (WSL/Linux)
+I learned how to fix files that look "green" (777 permissions) after moving them from Windows to WSL.
+
+### The Problem
+- **777 (rwxrwxrwx):** Readable, Writable, and Executable by everyone.
+- **Risk:** SSH keys and Terraform will refuse to run if files are too open.
+
+### The Fix (Recursive)
+Instead of changing files one by one, use `find` to change them all at once.
+
+1. **Fix Directories (Folders) -> 755**
+   `find . -type d -exec chmod 755 {} +`
+   * *Translation:* Find all items that are directories (`-type d`) and execute `chmod 755` on them.
+
+2. **Fix Files (Text/Code) -> 644**
+   `find . -type f -exec chmod 644 {} +`
+   * *Translation:* Find all items that are files (`-type f`) and execute `chmod 644` on them.
