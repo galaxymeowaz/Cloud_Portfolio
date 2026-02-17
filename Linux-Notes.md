@@ -445,3 +445,16 @@ Instead of changing files one by one, use `find` to change them all at once.
 2. **Fix Files (Text/Code) -> 644**
    `find . -type f -exec chmod 644 {} +`
    * *Translation:* Find all items that are files (`-type f`) and execute `chmod 644` on them.
+
+   ## 17 February 2026. Advanced File Search
+I learned the difference between searching for a *file name* and searching for *text inside a file*.
+
+### 1. Find by Name (`find`)
+- **Command:** `find ~ -name "main.tf"`
+- **Use case:** I know the file is called "main.tf" but I don't know which folder it is in.
+- **Tip:** Use `~` to search the entire home directory.
+
+### 2. Find by Content (`grep`)
+- **Command:** `grep -r "bakery" ~`
+- **Use case:** I forgot the file name, but I know I wrote the word "bakery" inside it.
+- **Flag `-r`:** Recursive (searches inside every folder and sub-folder).
