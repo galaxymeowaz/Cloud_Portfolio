@@ -458,3 +458,23 @@ I learned the difference between searching for a *file name* and searching for *
 - **Command:** `grep -r "bakery" ~`
 - **Use case:** I forgot the file name, but I know I wrote the word "bakery" inside it.
 - **Flag `-r`:** Recursive (searches inside every folder and sub-folder).
+
+## On 18 February 2026. Command Chaining (Logic Operators)
+I learned that running commands one by one is slow, but chaining them incorrectly is dangerous. I learned the "Traffic Light" operators to control execution flow.
+
+### 1. The Success Operator (`&&`)
+- **Concept:** "Do X, and **IF** that works, do Y."
+- **Symbol:** `&&` (Double Ampersand).
+- **Logic:** Linux checks the "Exit Code" of the first command. If it is `0` (Success), it runs the second. If it fails, it stops immediately.
+- **The "Dev" Use Case:** Preventing errors from cascading.
+  - *Bad Practice:* `mkdir NewProject; cd NewProject` (If `mkdir` fails, `cd` will still try to run and confuse me).
+  - *Best Practice:* `mkdir NewProject && cd NewProject` (If `mkdir` fails, the chain stops).
+
+### 2. The Failure Operator (`||`)
+- **Concept:** "Do X, and **IF** that fails, do Y."
+- **Symbol:** `||` (Double Pipe).
+- **Logic:** Only runs the second command if the first one errors out.
+- **Use Case:** Creating "Fallbacks" or error messages.
+  ```bash
+  ping -c 1 google.com || echo "Internet Connection Lost"
+  ```
