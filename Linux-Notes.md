@@ -478,3 +478,23 @@ I learned that running commands one by one is slow, but chaining them incorrectl
   ```bash
   ping -c 1 google.com || echo "Internet Connection Lost"
   ```
+
+  ## 19 Feb 2026. I Learned About Git Pre-Commit Hooks (Blocking Secrets)
+
+Instead of relying only on `.gitignore`, a local Git hook can physically block sensitive files from being committed.
+
+### 1. The Concept
+- **What:** A hidden Bash script located at `.git/hooks/pre-commit`.
+- **How:** It runs automatically when you type `git commit`. If the script exits with an error (`exit 1`), the commit is stopped immediately.
+
+### 2. The Code
+Save this inside `.git/hooks/pre-commit` and run `chmod +x .git/hooks/pre-commit` to make it executable:
+
+```bash
+#!/bin/bash
+
+# Block .env, .pem, .key, and .sqlite files from being committed
+if git diff --cached --name-only | grep -Eq '\.env|\.pem|\.key|\.sqlite'; then
+    echo "🚨 ERROR: Sensitive file detected. Commit blocked."
+    exit 1
+fi
