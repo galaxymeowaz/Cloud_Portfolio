@@ -498,3 +498,17 @@ if git diff --cached --name-only | grep -Eq '\.env|\.pem|\.key|\.sqlite'; then
     echo "🚨 ERROR: Sensitive file detected. Commit blocked."
     exit 1
 fi
+
+## 20 Feb 2026: Linux Output Redirection (`>` vs `>>`)
+
+Instead of printing command results to the screen, redirection saves that output directly into files.
+
+### 1. The Concept
+- **What:** Using the `>` (Overwrite) and `>>` (Append) symbols to route output.
+- **How:** Linux catches the text that would normally appear in the terminal and sends it to a document instead.
+
+### 2. The Commands
+- **`>` (Overwrite):** Creates a new file or completely erases an existing one to write the new data.
+  ```bash
+  echo "Server started" > log.txt 
+  # log.txt is created and contains only this line.
