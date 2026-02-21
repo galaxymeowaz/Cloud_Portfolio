@@ -512,3 +512,22 @@ Instead of printing command results to the screen, redirection saves that output
   ```bash
   echo "Server started" > log.txt 
   # log.txt is created and contains only this line.
+
+## 21 Feb 2026: Output Redirection vs. Piping with `tee`
+
+I learned the exact differences between silent file redirection (`>` and `>>`) and visible data splitting (`tee` and `tee -a`).
+
+### 1. Core Differences
+
+| Command / Operator | Action to File | Action to Screen (Terminal) |
+| :--- | :--- | :--- |
+| `>` | **Overwrites** existing file (or creates new). | **Hidden** (Does not print to screen). |
+| `>>` | **Appends** to the bottom of the file. | **Hidden** (Does not print to screen). |
+| `tee` | **Overwrites** existing file (or creates new). | **Visible** (Prints to screen). |
+| `tee -a` | **Appends** to the bottom of the file. | **Visible** (Prints to screen). |
+
+### 2. Practical Examples
+
+* **`>` (Silent Overwrite):** ```bash
+  echo "Data" > log.txt
+  ```
