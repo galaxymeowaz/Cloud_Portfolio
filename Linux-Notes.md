@@ -531,3 +531,21 @@ I learned the exact differences between silent file redirection (`>` and `>>`) a
 * **`>` (Silent Overwrite):** ```bash
   echo "Data" > log.txt
   ```
+
+  ## 22 Feb 2026: Symbolic Links (`ln -s`)
+
+I learned how to create Linux shortcuts, known as Symbolic Links (or symlinks). This allows me to access or edit a file from multiple locations without creating duplicate copies that waste storage space.
+
+### 1. The Concept
+- **What:** A file that points to another file or folder on the system.
+- **How:** Editing the symlink edits the original file. If the original file is deleted, the symlink breaks and becomes useless.
+
+### 2. The Command
+- **Syntax:** `ln -s [Original_File] [Shortcut_Name]`
+- **The Flag:** `-s` stands for "symbolic." Without it, Linux creates a "hard link" (a much more complex duplicate).
+
+### 3. Real-World Use Case
+In DevOps, server logs are often buried deep in the system (e.g., `/var/log/nginx/error.log`). Instead of typing that long path every time, I can create a shortcut right in my home directory:
+```bash
+ln -s /var/log/nginx/error.log ~/error_logs
+```
