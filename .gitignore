@@ -1,1 +1,14 @@
+# .gitignore
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.env
+
 .DS_Storeautomatic-accountant/
+
+# Ignoring other portfolio directories causing 7k+ file bloat
+Test/
+devsecops-pre-commit/
+automatic-accountant/app/
+
