@@ -12,9 +12,3 @@ variable "sheet_id" {
   description = "The ID of the Google Sheet"
   type        = string
 }
-
-variable "google_credentials" {
-  description = "The raw JSON content of the service account key"
-  type        = string
-  sensitive   = true
-}
