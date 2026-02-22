@@ -1,32 +1,103 @@
 import os
 import json
+import datetime
+from googleapiclient.discovery import build
+import gspread
+from google.oauth2 import service_account
 
-# This is the "Main Brain" of the robot
+# Environment Variables Configuration
+HOURLY_RATE = int(os.environ.get('HOURLY_RATE', 150))
+SPREADSHEET_ID = os.environ.get('GOOGLE_SHEETS_SPREADSHEET_ID')
+CALENDAR_ID = os.environ.get('CALENDAR_ID', 'primary')
+SYNC_DAYS_BACK = int(os.environ.get('SYNC_DAYS_BACK', 1))
+
+def get_credentials():
+    """
+    Load Service Account Credentials.
+    In AWS Lambda, using a secure secrets manager is best, but for Free Tier
+    we assume deploying a credentials.json file or loading via ENV JSON block.
+    """
+    scopes = [
+        'https://www.googleapis.com/auth/calendar.readonly',
+        'https://www.googleapis.com/auth/spreadsheets'
+    ]
+    if os.path.exists('credentials.json'):
+        return service_account.Credentials.from_service_account_file('credentials.json', scopes=scopes)
+    return None
+
 def lambda_handler(event, context):
-    # 1. Try to get the secrets from the Environment (Docker/AWS)
-    # The .get() method prevents crashing if the key is missing
-    cal_id = os.environ.get('CALENDAR_ID', 'MISSING_CALENDAR_ID')
-    sheet_id = os.environ.get('SHEET_ID', 'MISSING_SHEET_ID')
+    try:
+        print("--- LEDGER SYNC INITIATED ---")
+        creds = get_credentials()
+        if not creds:
+            print("ERROR: credentials.json missing. Ensure it's bundled in the Docker image securely or loaded via Secrets Manager.")
+            return {"statusCode": 500, "body": "Missing Google Auth Credentials"}
 
-    # 2. Print the status (This is what you will see in the terminal)
-    print(f"--- ROBOT REPORT ---")
-    print(f"Status: Waking Up...")
-    print(f"Target Calendar: {cal_id}")
-    print(f"Target Sheet: {sheet_id}")
-    
-    return {
-        'statusCode': 200,
-        'body': json.dumps('Sync Complete!')
-    }
+        # 1. Fetch Calendar Events (Targeting the past N days)
+        cal_service = build('calendar', 'v3', credentials=creds)
+        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
+        past_time = (datetime.datetime.utcnow() - datetime.timedelta(days=SYNC_DAYS_BACK)).isoformat() + 'Z'
+        
+        print(f"Scanning Calendar: {CALENDAR_ID} for the past {SYNC_DAYS_BACK} days...")
+        
+        events_result = cal_service.events().list(
+            calendarId=CALENDAR_ID, timeMin=past_time, timeMax=now,
+            singleEvents=True, orderBy='startTime').execute()
+        events = events_result.get('items', [])
+        
+        if not events:
+            print(f"No meetings found in the last {SYNC_DAYS_BACK} days.")
+            return {"statusCode": 200, "body": json.dumps("No meetings found.")}
 
-# This block allows the script to run LOCALLY (on your laptop/Docker)
-# AWS ignores this, but Docker uses it.
+        # 2. Append to Google Sheets
+        gc = gspread.authorize(creds)
+        sheet = gc.open_by_key(SPREADSHEET_ID).sheet1
+        
+        rows_to_append = []
+        for event in events:
+            start_str = event['start'].get('dateTime')
+            end_str = event['end'].get('dateTime')
+            
+            # Skip all-day events (they only have 'date', not 'dateTime')
+            if start_str and end_str:
+                start = datetime.datetime.fromisoformat(start_str.replace('Z', '+00:00'))
+                end = datetime.datetime.fromisoformat(end_str.replace('Z', '+00:00'))
+                duration_hours = (end - start).total_seconds() / 3600
+                
+                # Assume title format "Client Name - Sync"
+                client = event.get('summary', 'Unknown Client').split('-')[0].strip()
+                amount_owed = duration_hours * HOURLY_RATE
+                
+                row = [
+                    start.strftime("%Y-%m-%d"),       # [A] Event Date
+                    client,                           # [B] Client
+                    "Consulting / Meeting",           # [C] Service
+                    f"${amount_owed:.2f}",             # [D] Amount Owed
+                    "UNPAID",                         # [E] Status
+                    "",                               # [F] Payment Received Date
+                    ""                                # [G] Comments (Manual Entry)
+                ]
+                rows_to_append.append(row)
+                print(f"Prepared bill for {client}: ${amount_owed:.2f}")
+
+        if rows_to_append:
+            # Batch append for API efficiency
+            sheet.append_rows(rows_to_append)
+            print(f"Successfully appended {len(rows_to_append)} rows to the Ledger.")
+
+        return {
+            'statusCode': 200,
+            'body': json.dumps('Ledger Sync Complete!')
+        }
+        
+    except Exception as e:
+        print(f"System Error: {str(e)}")
+        return {
+            'statusCode': 500,
+            'body': json.dumps({"error": str(e)})
+        }
+
 if __name__ == "__main__":
-    # Create fake data so the function doesn't crash
-    fake_event = {}
-    fake_context = {}
-    
-    print("Starting Docker Test...")
-    # Manually trigger the function
-    lambda_handler(fake_event, fake_context)
-    print("Docker Test Finished.")
+    # Local Docker test stub
+    print("Testing locally...")
+    lambda_handler({}, {})

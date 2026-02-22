@@ -1,14 +1,12 @@
-# 1. Use a lightweight Python base image (The OS)
-FROM python:3.9-slim
+# 1. Use the official AWS Lambda Python image (Required for AWS execution)
+FROM public.ecr.aws/lambda/python:3.9
 
-# 2. Set the working directory inside the container
-WORKDIR /app
+# 2. Copy dependencies if required
+COPY requirements.txt ./
+RUN pip install -r requirements.txt || true
 
-# 3. Copy your local files into the container
-COPY . /app
+# 3. Copy your local Python scripts into the container's designated task root
+COPY calendar_sync.py ${LAMBDA_TASK_ROOT}
 
-# 4. Install dependencies (if you had a requirements.txt)
-# RUN pip install requests google-api-python-client
-
-# 5. The command to run when the container starts
-CMD ["python", "calendar_sync.py"]
+# 4. Point to the handler function inside your Python file (filename.function_name)
+CMD ["calendar_sync.lambda_handler"]

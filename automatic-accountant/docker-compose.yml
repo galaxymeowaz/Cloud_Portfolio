@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  # Tests the Scheduled Ledger Sync logic
+  ledger_sync_test:
+    build: .
+    volumes:
+      # Mount credentials securely into the container for local auth testing
+      - ./credentials.json:/var/task/credentials.json:ro
+      - ./.env:/var/task/.env:ro
+    env_file:
+      - .env
+    # Override command to run the python file directly
+    command: ["python3", "calendar_sync.py"]
