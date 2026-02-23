@@ -549,3 +549,17 @@ In DevOps, server logs are often buried deep in the system (e.g., `/var/log/ngin
 ```bash
 ln -s /var/log/nginx/error.log ~/error_logs
 ```
+
+## 23 Feb 2026: File Comparison (`diff`)
+
+I learned how to compare the contents of two files line-by-line. This is the underlying command that powers `git diff` and is essential for tracking configuration drift.
+
+### 1. The Concept
+- **What:** The `diff` command checks two files and outputs only the lines that are different.
+- **Why:** In DevSecOps, it is used to audit configuration changes, detect unauthorized modifications, or troubleshoot failing code by comparing a broken file to a working backup.
+
+### 2. The Commands
+- **Basic Comparison:**
+  ```bash
+  diff old_config.txt new_config.txt
+  ```
