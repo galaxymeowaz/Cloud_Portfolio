@@ -563,3 +563,21 @@ I learned how to compare the contents of two files line-by-line. This is the und
   ```bash
   diff old_config.txt new_config.txt
   ```
+
+  ## 24 Feb 2026: Find and Replace Text (`sed`)
+
+I learned how to automatically find and replace text inside configuration files using the command line. This is essential for CI/CD pipelines where files must be updated programmatically.
+
+### 1. The Concept
+- **What:** `sed` stands for Stream Editor. It reads text, modifies it according to a rule, and outputs the result.
+- **Why:** Opening files in `nano` or VS Code is impossible during an automated server deployment. `sed` acts as an automated "Ctrl+F and Replace."
+
+### 2. The Command Structure
+The syntax uses `s` for substitute and `g` for global (replace all occurrences on a line).
+- **Format:** `sed 's/OLD_TEXT/NEW_TEXT/g' filename`
+
+### 3. Practical Examples
+- **Preview Changes (Dry Run):**
+  ```bash
+  sed 's/HTTP/HTTPS/g' config.txt
+  ```
