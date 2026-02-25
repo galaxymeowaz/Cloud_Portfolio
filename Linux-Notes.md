@@ -581,3 +581,36 @@ The syntax uses `s` for substitute and `g` for global (replace all occurrences o
   ```bash
   sed 's/HTTP/HTTPS/g' config.txt
   ```
+
+  ## Linux Notes: Archiving and Compressing (`tar`)
+
+`tar` is short for **Tape Archive**.
+
+### 1. Creating a Compressed Archive (`-czvf`)
+Used to bundle and compress an entire folder into a single file.
+
+**Command:** `tar -czvf backup_logs.tar.gz app_logs/`
+
+**Breakdown:**
+* `tar`: The Linux command used to bundle files together.
+* `-czvf`: The flags dictating the action.
+    * `c`: **C**reate a new archive.
+    * `z`: Compress the archive using g**z**ip (this is what makes the file size smaller).
+    * `v`: **V**erbose (displays the progress on the screen).
+    * `f`: **F**ilename (specifies the output file name; must be the last letter).
+* `backup_logs.tar.gz`: The name of the new compressed file being created.
+* `app_logs/`: The target folder being backed up.
+
+### 2. Viewing an Archive (`-tzvf`)
+Used to view the contents of a compressed file without extracting it.
+
+**Command:**
+`tar -tzvf backup_logs.tar.gz`
+* `t`: Lis**T** the contents.
+
+### 3. Extracting an Archive (`-xzvf`)
+Used to unpack a zipped archive back into a standard folder.
+
+**Command:**
+`tar -xzvf backup_logs.tar.gz`
+* `x`: e**X**tract the files.
