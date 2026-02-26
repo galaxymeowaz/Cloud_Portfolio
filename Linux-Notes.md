@@ -614,3 +614,18 @@ Used to unpack a zipped archive back into a standard folder.
 **Command:**
 `tar -xzvf backup_logs.tar.gz`
 * `x`: e**X**tract the files.
+
+## 26 Feb 2026: Directory Synchronization (`rsync`)
+
+I learned the enterprise upgrade to the basic `cp` command. `rsync` (Remote Sync) is used to mirror folders locally or across the network efficiently.
+
+### 1. The Concept
+- **What:** A command that synchronizes files from a source directory to a destination.
+- **Why:** If I have 10GB of data and I change a single 10KB text file, `cp` will copy all 10GB again. `rsync` calculates the delta (the difference) and only copies the 10KB change.
+
+### 2. The Command
+- **Syntax:** `rsync -av [source_folder]/ [destination_folder]/`
+- **The Flags:**
+  - `-a` (Archive): Preserves all critical file permissions, ownership, and symbolic links.
+  - `-v` (Verbose): Shows exactly what files are being transferred on the screen.
+  - `-P` (Progress): Shows a progress bar and allows the command to resume exactly where it left off if the transfer is interrupted.
