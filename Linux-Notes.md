@@ -629,3 +629,23 @@ I learned the enterprise upgrade to the basic `cp` command. `rsync` (Remote Sync
   - `-a` (Archive): Preserves all critical file permissions, ownership, and symbolic links.
   - `-v` (Verbose): Shows exactly what files are being transferred on the screen.
   - `-P` (Progress): Shows a progress bar and allows the command to resume exactly where it left off if the transfer is interrupted.
+
+  ## 27 Feb 2026: Live Terminal Monitoring (`watch`)
+
+I learned how to turn any standard static Linux command into a real-time, self-updating dashboard. 
+
+### 1. The Concept
+- **What:** The `watch` command executes a designated program periodically and shows the output in full-screen.
+- **Why:** Instead of manually typing `df -h` over and over to see if a hard drive is getting full during a massive file transfer, `watch` automates the refresh process.
+
+### 2. The Command
+- **Syntax:** `watch -n [seconds] [command]`
+- **The Flags:**
+  - `-n`: Specifies the interval in seconds.
+  - `-d`: (Highlight Differences) Visually highlights exactly which characters changed between the last refresh and the current one.
+
+### 3. Practical DevOps Examples
+- **Monitoring Disk Space:** `watch -n 5 df -h` (Refreshes every 5 seconds).
+- **Monitoring Active Processes:** `watch -n 2 "ps aux | grep python"` (Monitors a running Python script).
+- **Monitoring Live Logs:** `watch -n 1 tail -n 15 /var/log/auth.log` (Watches for live SSH login attempts).
+- **Monitoring RAM usage in WSL** `watch -n 1 free -h` (watches for RAM usage every 1 second)
