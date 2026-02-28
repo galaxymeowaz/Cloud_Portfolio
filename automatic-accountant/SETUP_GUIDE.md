@@ -236,10 +236,10 @@ aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS
 docker build -t automatic-accountant-repo .
 
 # 3. Tag it for the ECR URL you copied in Step 5.2
-docker tag automatic-accountant-repo:latest YOUR_ECR_REPO_URL:v3
+docker tag automatic-accountant-repo:latest YOUR_ECR_REPO_URL:v4
 
 # 4. Push the physical code to AWS
-docker push YOUR_ECR_REPO_URL:v3
+docker push YOUR_ECR_REPO_URL:v4
 ```
 
 **Congratulations!** AWS EventBridge will now trigger the AWS Lambda every 24 hours to automatically calculate your bills. Nothing more for you to click or touch.
