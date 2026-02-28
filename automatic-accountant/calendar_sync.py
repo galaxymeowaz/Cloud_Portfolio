@@ -75,8 +75,8 @@ def lambda_handler(event, context):
                 # Assume title format "Client Name" or "Client Name [$250]"
                 raw_title = event.get('summary', 'Unknown Client').strip()
                 
-                # Regex to search for custom rates like "$150", "[150]", "@150", or "($150)" in the title
-                rate_match = re.search(r'[\$\[\@\(]\s*(\d+(?:\.\d+)?)\s*[\]\)]?', raw_title)
+                # Regex to search for custom rates like "$150", "[$150]", "@150", or "($150)" in the title
+                rate_match = re.search(r'[\$\[\@\(]\s*[\$\@]?\s*(\d+(?:\.\d+)?)\s*[\]\)]?', raw_title)
                 
                 # Clean the title of rates
                 if rate_match:

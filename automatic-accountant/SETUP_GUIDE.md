@@ -46,6 +46,28 @@ You now need to tell the Python script *which* calendar and sheet to look at.
 1. **Calendar ID:** Still on the Calendar "Settings and sharing" page, scroll down to "Integrate Calendar". Copy the `Calendar ID` (e.g., `c_1a2b3c...@group.calendar.google.com`).
 2. **Spreadsheet ID:** Look at the URL of your Google Sheet. It looks like `https://docs.google.com/spreadsheets/d/1BxiMVs0X.../edit`. The ID is the random string inside the slashes: `1BxiMVs0X...`
 
+### Step 2.3: Correctly Format Your Google Sheet
+For the Robot to automatically deposit rows into your spreadsheet, it needs a specific header structure on Row 1.
+1. Open your Google Sheet.
+2. In the very first row (A1 to G1), type exactly these headers:
+    - **A1:** `Event Date`
+    - **B1:** `Client`
+    - **C1:** `Service`
+    - **D1:** `Amount Owed`
+    - **E1:** `Status`
+    - **F1:** `Payment Received Date`
+    - **G1:** `Comments (Manual Entry)`
+
+### Step 2.4: Correctly Format Your Calendar Events
+When scheduling a meeting with a client, the Robot looks at the **Event Title** to calculate money and services.
+*   **Format:** `Client Name [$Rate] - Service Type`
+*   **Example:** `Wayne Enterprises [$250] - Architecture Review`
+
+**Rules to Remember:**
+1.  **Dynamic Rates:** If you want to charge a specific hourly rate, put it anywhere in the title using brackets, parentheses, or a $ sign (e.g., `[$250]`, `($150)`, `$90.50`). If you leave it out, the Robot defaults to the `HOURLY_RATE` variable in your `.env` file.
+2.  **Service Type:** If you want to specify a service, put a hyphen `-` followed by the service name. If you leave it out, the Robot defaults to `Consulting / Meeting`.
+3.  **Times are Required:** You **cannot** use the "All-Day" checkbox. The Event must have a specific Start Time and End Time (e.g., `1:00 PM - 3:00 PM`) so the Robot can calculate the duration multiplied by the rate!
+
 ---
 
 ## 📌 Phase 3: Amazon Web Services (AWS) Setup
