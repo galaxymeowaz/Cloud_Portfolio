@@ -126,7 +126,8 @@ AWS is where the code executes daily. To do this securely, we will create an **I
                 "lambda:TagResource",
                 "lambda:AddPermission",
                 "lambda:RemovePermission",
-                "lambda:GetPolicy"
+                "lambda:GetPolicy",
+                "lambda:ListVersionsByFunction"
             ],
             "Resource": "arn:aws:lambda:*:*:function:ledger_sync_function"
         },
