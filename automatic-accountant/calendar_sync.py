@@ -50,9 +50,16 @@ def lambda_handler(event, context):
             print(f"No meetings found in the last {SYNC_DAYS_BACK} days.")
             return {"statusCode": 200, "body": json.dumps("No meetings found.")}
 
-        # 2. Append to Google Sheets
+        # 2. Fetch Existing Sheet Data for Deduplication
         gc = gspread.authorize(creds)
         sheet = gc.open_by_key(SPREADSHEET_ID).sheet1
+        existing_records = sheet.get_all_values()
+        
+        # Build a set of existing signatures to prevent duplicate entries (Signature: "Date_Client")
+        existing_signatures = set()
+        for row in existing_records[1:]: # Skip header
+            if len(row) >= 2:
+                existing_signatures.add(f"{row[0]}_{row[1]}")
         
         rows_to_append = []
         for event in events:
@@ -71,26 +78,48 @@ def lambda_handler(event, context):
                 # Regex to search for custom rates like "$150", "[150]", "@150", or "($150)" in the title
                 rate_match = re.search(r'[\$\[\@\(]\s*(\d+(?:\.\d+)?)\s*[\]\)]?', raw_title)
                 
+                # Clean the title of rates
                 if rate_match:
                     client_rate = float(rate_match.group(1))
-                    # Clean the client name by removing the rate section
-                    client = raw_title.replace(rate_match.group(0), '').split('-')[0].strip()
+                    # Remove the exact rate string from the title
+                    clean_title = raw_title.replace(rate_match.group(0), '')
                 else:
                     client_rate = HOURLY_RATE
-                    client = raw_title.split('-')[0].strip()
+                    clean_title = raw_title
+                    
+                # Clean up any messy double spaces left over before parsing the hyphen
+                clean_title = re.sub(r'\s+', ' ', clean_title).strip()
+                    
+                # Dynamically parse the "Service" if a hyphen is used (e.g., "Client - Web Design")
+                if '-' in clean_title:
+                    client = clean_title.split('-', 1)[0].strip()
+                    service_name = clean_title.split('-', 1)[1].strip()
+                else:
+                    client = clean_title.strip()
+                    service_name = "Consulting / Meeting"
                     
                 amount_owed = duration_hours * client_rate
                 
+                # Format Date to include the specific times: YYYY-MM-DD (01:00 PM - 03:00 PM)
+                time_format = f"{start.strftime('%Y-%m-%d')} ({start.strftime('%I:%M %p')} - {end.strftime('%I:%M %p')})"
+                
+                # Check Deduplication Signature
+                signature = f"{time_format}_{client}"
+                if signature in existing_signatures:
+                    print(f"Skipping Duplicate: {signature}")
+                    continue
+                
                 row = [
-                    start.strftime("%Y-%m-%d"),       # [A] Event Date
+                    time_format,                      # [A] Event Date & Time
                     client,                           # [B] Client
-                    "Consulting / Meeting",           # [C] Service
+                    service_name,                     # [C] Service
                     f"${amount_owed:.2f}",             # [D] Amount Owed
                     "UNPAID",                         # [E] Status
                     "",                               # [F] Payment Received Date
                     ""                                # [G] Comments (Manual Entry)
                 ]
                 rows_to_append.append(row)
+                existing_signatures.add(signature) # Prevent intra-batch duplicates
                 print(f"Prepared bill for {client}: ${amount_owed:.2f}")
 
         if rows_to_append:
