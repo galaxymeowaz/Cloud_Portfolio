@@ -1,3 +1,7 @@
+# ==============================================================================
+# Automatic Accountant - Lambda Environment
+# Created by AzTay (aztay.org) | Copyright (c) 2026
+# ==============================================================================
 # 1. Use the official AWS Lambda Python image (Required for AWS execution)
 FROM public.ecr.aws/lambda/python:3.9
 

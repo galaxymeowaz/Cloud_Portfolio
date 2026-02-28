@@ -1,4 +1,5 @@
 # Automatic Accountant: Ultimate Setup Guide
+> *Created by AzTay (aztay.org) | Copyright (c) 2026. Unauthorized copying or redistribution is strictly prohibited.*
 
 This comprehensive guide serves as a manual for setting up the **Automatic Accountant** pipeline from scratch. When you are ready to transition from a dummy test account to your actual business accounts, follow these steps sequentially to create the required Cloud APIs, connect the environment variables, and deploy your infrastructure to AWS.
 

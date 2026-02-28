@@ -1,3 +1,8 @@
+# ==============================================================================
+# Automatic Accountant Pipeline
+# Created by AzTay (aztay.org) | Copyright (c) 2026
+# Unauthorized copying, modification, or distribution is strictly prohibited.
+# ==============================================================================
 import os
 import json
 import datetime
@@ -28,6 +33,10 @@ def get_credentials():
 
 def lambda_handler(event, context):
     try:
+        print("==================================================")
+        print(" AUTOMATIC ACCOUNTANT PIPELINE ")
+        print(" Created by AzTay (aztay.org) ")
+        print("==================================================")
         print("--- LEDGER SYNC INITIATED ---")
         creds = get_credentials()
         if not creds:

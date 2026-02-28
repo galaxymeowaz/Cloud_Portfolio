@@ -1,3 +1,8 @@
+# ==============================================================================
+# Automatic Accountant Infrastructure
+# Created by AzTay (aztay.org) | Copyright (c) 2026
+# Unauthorized copying, modification, or distribution is strictly prohibited.
+# ==============================================================================
 terraform {
   required_providers {
     aws = {
