@@ -2,8 +2,18 @@
 
 This comprehensive guide serves as a manual for setting up the **Automatic Accountant** pipeline from scratch. When you are ready to transition from a dummy test account to your actual business accounts, follow these steps sequentially to create the required Cloud APIs, connect the environment variables, and deploy your infrastructure to AWS.
 
+## 🛠️ Prerequisites
+Before starting, ensure your computer has the following tools installed:
+1.  **[Python 3.9+](https://www.python.org/downloads/):** The programming language that runs the logic.
+2.  **[Docker](https://www.docker.com/products/docker-desktop/):** Packages the code so it runs identically on your laptop and the cloud.
+3.  **[Terraform](https://developer.hashicorp.com/terraform/downloads):** An "Infrastructure as Code" tool that automatically builds the cloud servers for you by reading the `main.tf` file.
+4.  **[AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html):** Allows your laptop terminal to securely talk to Amazon Web Services.
+5.  **Git/VSCode:** To edit your code and `.env` files easily.
+
+---
+
 ## 📌 Phase 1: Google Cloud Platform (GCP) Setup
-We need to give our script legal permission to read your Google Calendar and edit your Google Sheets. Instead of using your personal Gmail password, we will create a secure "Robot User" (a Service Account).
+We need to give our script legal permission to read your Google Calendar and edit your Google Sheets. Instead of using your personal Gmail password, we will create a secure "Robot User" (a Service Account) in Google Cloud Platform (GCP).
 
 ### Step 1.1: Create a Google Cloud Project
 1. Log into the [Google Cloud Console](https://console.cloud.google.com).
@@ -71,12 +81,100 @@ When scheduling a meeting with a client, the Robot looks at the **Event Title** 
 ---
 
 ## 📌 Phase 3: Amazon Web Services (AWS) Setup
-AWS is where the code executes daily. To do this securely, we will create an IAM User with a strict "Least Privilege" policy so your laptop can run Terraform without being an overarching Administrator.
+AWS is where the code executes daily. To do this securely, we will create an **IAM (Identity and Access Management)** User. This creates a strict "Least Privilege" security guard so your laptop can run Terraform without accidentally giving it the keys to your entire Amazon account.
 
 ### Step 3.1: Create the Setup Policy
 1. Log into your AWS Console and search for **IAM**.
 2. Go to **Policies** (left menu) > **Create policy**.
-3. Select the **JSON** tab and paste the Custom Terraform Policy code (Provided previously, containing strict permissions for ECR, IAM, Lambda, and EventBridge).
+3. Select the **JSON** tab and paste the Custom Terraform Policy code below. This code uses "Least Privilege"—it only grants the exact permissions Terraform needs to build this specific project and nothing else:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowIAMRoleCreation",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:GetRole",
+                "iam:PassRole",
+                "iam:PutRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:GetRolePolicy",
+                "iam:ListRolePolicies",
+                "iam:ListInstanceProfilesForRole",
+                "iam:ListAttachedRolePolicies",
+                "iam:AttachRolePolicy",
+                "iam:DetachRolePolicy",
+                "iam:TagRole"
+            ],
+            "Resource": "arn:aws:iam::*:role/automatic_accountant_role"
+        },
+        {
+            "Sid": "AllowLambdaManagement",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:CreateFunction",
+                "lambda:DeleteFunction",
+                "lambda:GetFunction",
+                "lambda:GetFunctionConfiguration",
+                "lambda:UpdateFunctionConfiguration",
+                "lambda:UpdateFunctionCode",
+                "lambda:ListTags",
+                "lambda:TagResource",
+                "lambda:AddPermission",
+                "lambda:RemovePermission",
+                "lambda:GetPolicy"
+            ],
+            "Resource": "arn:aws:lambda:*:*:function:ledger_sync_function"
+        },
+        {
+            "Sid": "AllowECRManagement",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:CreateRepository",
+                "ecr:DeleteRepository",
+                "ecr:DescribeRepositories",
+                "ecr:PutLifecyclePolicy",
+                "ecr:GetLifecyclePolicy",
+                "ecr:DeleteLifecyclePolicy",
+                "ecr:ListTagsForResource",
+                "ecr:TagResource",
+                "ecr:GetAuthorizationToken",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:PutImage",
+                "ecr:ListImages",
+                "ecr:DescribeImages",
+                "ecr:BatchGetImage"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowEventBridgeManagement",
+            "Effect": "Allow",
+            "Action": [
+                "events:PutRule",
+                "events:DeleteRule",
+                "events:DescribeRule",
+                "events:EnableRule",
+                "events:DisableRule",
+                "events:PutTargets",
+                "events:RemoveTargets",
+                "events:ListTargetsByRule",
+                "events:ListTagsForResource",
+                "events:TagResource"
+            ],
+            "Resource": "arn:aws:events:*:*:rule/daily_ledger_sync_rule"
+        }
+    ]
+}
+```
+
 4. Click Next, name it `AutomaticAccountant-TerraformDeployer`, and hit Create.
 
 ### Step 3.2: Create the IAM User & Access Keys
@@ -118,7 +216,7 @@ Before deploying to the cloud, prove that the math and permissions work locally.
 If your Google Sheet populates perfectly, you are ready for AWS.
 
 ### Step 5.2: Launch the Infrastructure
-Use Terraform to dynamically build the AWS Architecture (Storage, IAM Roles, Cron Jobs, Lambda containers).
+Use Terraform to dynamically build the AWS Architecture (Storage, IAM Roles, Cron Jobs, Lambda containers). Instead of clicking buttons on the AWS website, Terraform reads `main.tf` to build everything safely.
 ```bash
 terraform init
 terraform plan
@@ -127,9 +225,9 @@ terraform apply
 *Note: Type `yes` when prompted. When it finishes, Terraform will output an `ecr_repository_url` in green text. Copy that URL!*
 
 ### Step 5.3: Upload the Brain to AWS
-You built the empty Lambda skeleton in Step 5.2. Now, you must bundle your Python code with the Google dependencies into a Docker container and push it to AWS ECR.
+You built the empty Lambda server in Step 5.2. Now, you must bundle your Python code with the Google dependencies into a Docker container and push it to **AWS ECR (Elastic Container Registry)**. ECR is essentially a private cloud folder where AWS stores your Docker images securely.
 
-*Note: You need AWS CLI installed and configured locally to do this.*
+*Note: You must have the AWS CLI installed and configured on your laptop (`aws configure`) using the Access Keys you generated in Step 3.2.*
 ```bash
 # 1. Login your laptop's Docker engine to AWS AWS
 aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin YOUR_AWS_ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com
