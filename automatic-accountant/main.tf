@@ -95,7 +95,7 @@ resource "aws_lambda_function" "ledger_sync" {
   function_name = "ledger_sync_function"
   role          = aws_iam_role.lambda_exec.arn
   package_type  = "Image"
-  image_uri     = "${aws_ecr_repository.app_repo.repository_url}:v4"
+  image_uri     = "${aws_ecr_repository.app_repo.repository_url}:v5"
   timeout       = 60
   memory_size   = 128
 
