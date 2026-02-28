@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   # Tests the Scheduled Ledger Sync logic
@@ -10,5 +9,5 @@ services:
       - ./.env:/var/task/.env:ro
     env_file:
       - .env
-    # Override command to run the python file directly
-    command: ["python3", "calendar_sync.py"]
+    # Override the AWS Lambda entrypoint to run the python file directly
+    entrypoint: ["python3", "calendar_sync.py"]
