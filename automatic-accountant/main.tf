@@ -1,6 +1,6 @@
 # ==============================================================================
 # Automatic Accountant Infrastructure
-# Created by AzTay (aztay.org) | Copyright (c) 2026
+# Created by Joseph Tay (aztay.org) | Copyright (c) 2026
 # Unauthorized copying, modification, or distribution is strictly prohibited.
 # ==============================================================================
 terraform {

@@ -1,6 +1,6 @@
 # ==============================================================================
 # Automatic Accountant - Lambda Environment
-# Created by AzTay (aztay.org) | Copyright (c) 2026
+# Created by Joseph Tay (aztay.org) | Copyright (c) 2026
 # Licensed under the MIT License. 
 # ==============================================================================
 # 1. Use the official AWS Lambda Python image (Required for AWS execution)

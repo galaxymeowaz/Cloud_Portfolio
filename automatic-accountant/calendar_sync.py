@@ -1,6 +1,6 @@
 # ==============================================================================
 # Automatic Accountant Pipeline
-# Created by AzTay (aztay.org) | Copyright (c) 2026
+# Created by Joseph Tay (aztay.org) | Copyright (c) 2026
 # Licensed under the MIT License - https://opensource.org/licenses/MIT
 # ==============================================================================
 import os
@@ -35,7 +35,7 @@ def lambda_handler(event, context):
     try:
         print("==================================================")
         print(" AUTOMATIC ACCOUNTANT PIPELINE ")
-        print(" Created by AzTay (aztay.org) | MIT License ")
+        print(" Created by Joseph Tay (aztay.org) | MIT License ")
         print("==================================================")
         print("--- LEDGER SYNC INITIATED ---")
         creds = get_credentials()

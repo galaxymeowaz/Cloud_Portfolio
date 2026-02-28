@@ -1,5 +1,5 @@
 # 🤖 Automatic Accountant (Serverless Ledger Sync)
-> *Created by AzTay (aztay.org) | Copyright (c) 2026 | Licensed under the MIT License.*
+> *Created by Joseph Tay (aztay.org) | Copyright (c) 2026 | Licensed under the MIT License.*
 
 Automated bidirectional data synchronization pipeline built entirely on **AWS Free Tier Serverless Infrastructure** (Terraform).
 
