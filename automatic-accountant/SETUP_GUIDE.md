@@ -245,3 +245,25 @@ docker push YOUR_ECR_REPO_URL:v6
 ```
 
 **Congratulations!** AWS EventBridge will now trigger the AWS Lambda every 24 hours to automatically calculate your bills. Nothing more for you to click or touch.
+
+---
+
+## 📌 Phase 6: Teardown & Cost Prevention (Safeguard)
+
+If your AWS Free Tier is about to end, or if you simply no longer want the Automatic Accountant to run, you can instantly and permanently delete the entire architecture so you are never billed.
+
+**1. Delete the specific Docker Images via AWS Console:**
+AWS protects Elastic Container Registries (ECR) from accidental deletion. If there is an image inside it, it refuses to let Terraform delete it. 
+*   Go to the **AWS Console** > **Elastic Container Registry**.
+*   Click into `automatic-accountant-repo`.
+*   Check the box next to all the image tags (`v6`, `v5`, etc.) and click **Delete**.
+
+**2. Destroy the Infrastructure via Terraform:**
+Open your laptop terminal, ensure you are inside the `automatic-accountant` folder, and run:
+```bash
+terraform destroy
+```
+Type `yes` when prompted. Terraform will systematically hunt down and permanently delete the Lambda, the EventBridge daily cron job, the IAM Roles, and the ECR Repository. 
+
+**3. Revoke Google Permissions (Optional):**
+Go back to your Google Sheet and Google Calendar and remove the Robot's email address from the "Share" permissions to completely close the loop.
