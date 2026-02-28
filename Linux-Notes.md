@@ -648,4 +648,19 @@ I learned how to turn any standard static Linux command into a real-time, self-u
 - **Monitoring Disk Space:** `watch -n 5 df -h` (Refreshes every 5 seconds).
 - **Monitoring Active Processes:** `watch -n 2 "ps aux | grep python"` (Monitors a running Python script).
 - **Monitoring Live Logs:** `watch -n 1 tail -n 15 /var/log/auth.log` (Watches for live SSH login attempts).
-- **Monitoring RAM usage in WSL** `watch -n 1 free -h` (watches for RAM usage every 1 second)
+- **Monitoring RAM usage in WSL** `wcatch -n 1 free -h` (watches for RAM usage every 1 second)
+
+## 28 Feb 2026: Locating Executables (`which`)
+
+I learned how to verify exactly where a command is running from on the system.
+
+### 1. The Concept
+- **What:** The `which` command searches the system's `$PATH` to find the exact file location of an executable program.
+- **Why:** If I type `python3` and it fails, or if it runs the wrong version, `which python3` tells me exactly which binary file Linux is executing. This is critical for troubleshooting server environments with multiple software versions.
+
+### 2. The Command
+- **Syntax:** `which [command_name]`
+- **Example:**
+  ```bash
+  which terraform
+  ```
