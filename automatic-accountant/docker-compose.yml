@@ -2,6 +2,7 @@
 # ==============================================================================
 # Automatic Accountant - Docker Testing
 # Created by AzTay (aztay.org) | Copyright (c) 2026
+# Licensed under the MIT License.
 # ==============================================================================
 services:
   # Tests the Scheduled Ledger Sync logic

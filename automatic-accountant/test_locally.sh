@@ -2,6 +2,7 @@
 # ==============================================================================
 # Automatic Accountant - Local Testing Script
 # Created by AzTay (aztay.org) | Copyright (c) 2026
+# Licensed under the MIT License.
 # ==============================================================================
 # Local execution and testing script for DevOps workflows
 set -e
