@@ -232,14 +232,14 @@ You built the empty Lambda server in Step 5.2. Now, you must bundle your Python 
 # 1. Login your laptop's Docker engine to AWS AWS
 aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin YOUR_AWS_ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com
 
-# 2. Build the Docker Image for AWS (Forcing x86 Architecture)
-docker build --platform linux/amd64 -t automatic-accountant-repo .
+# 2. Build the Docker Image for AWS (Forcing x86 Architecture and disabling OCI Provenance)
+docker build --platform linux/amd64 --provenance=false -t automatic-accountant-repo .
 
 # 3. Tag it for the ECR URL you copied in Step 5.2
-docker tag automatic-accountant-repo:latest YOUR_ECR_REPO_URL:v5
+docker tag automatic-accountant-repo:latest YOUR_ECR_REPO_URL:v6
 
 # 4. Push the physical code to AWS
-docker push YOUR_ECR_REPO_URL:v5
+docker push YOUR_ECR_REPO_URL:v6
 ```
 
 **Congratulations!** AWS EventBridge will now trigger the AWS Lambda every 24 hours to automatically calculate your bills. Nothing more for you to click or touch.
