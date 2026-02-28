@@ -1,7 +1,7 @@
 # ==============================================================================
 # Automatic Accountant Infrastructure
 # Created by Joseph Tay (aztay.org) | Copyright (c) 2026
-# Unauthorized copying, modification, or distribution is strictly prohibited.
+# Licensed under the MIT License - https://opensource.org/licenses/MIT
 # ==============================================================================
 terraform {
   required_providers {
