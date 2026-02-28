@@ -14,7 +14,7 @@ This infrastructure is intentionally designed using the **Principle of Least Pri
    - EventBridge runs a cron schedule `rate(1 day)`
    - Triggers the `ledger_sync` Docker container via AWS Lambda.
    - Authorized via a strict IAM role, it scrapes the previous 24 hours of Google Calendar data.
-   - Computes amount owed using an environment variable (`HOURLY_RATE`).
+   - Computes amount owed dynamically using Regex to parse the event title (e.g., `Client Name [$250]`), gracefully falling back to the `HOURLY_RATE` environment variable if none is provided.
    - Appends a new formatted row to Google Sheets via `gspread`, tagging it as `UNPAID`.
    - **FinOps Win:** Bypasses X-Ray Tracing and utilizes minimal memory sizes.
 

@@ -1,9 +1,10 @@
 import os
 import json
 import datetime
+import re
 from googleapiclient.discovery import build
-import gspread
 from google.oauth2 import service_account
+import gspread
 
 # Environment Variables Configuration
 HOURLY_RATE = int(os.environ.get('HOURLY_RATE', 150))
@@ -64,9 +65,21 @@ def lambda_handler(event, context):
                 end = datetime.datetime.fromisoformat(end_str.replace('Z', '+00:00'))
                 duration_hours = (end - start).total_seconds() / 3600
                 
-                # Assume title format "Client Name - Sync"
-                client = event.get('summary', 'Unknown Client').split('-')[0].strip()
-                amount_owed = duration_hours * HOURLY_RATE
+                # Assume title format "Client Name" or "Client Name [$250]"
+                raw_title = event.get('summary', 'Unknown Client').strip()
+                
+                # Regex to search for custom rates like "$150", "[150]", "@150", or "($150)" in the title
+                rate_match = re.search(r'[\$\[\@\(]\s*(\d+(?:\.\d+)?)\s*[\]\)]?', raw_title)
+                
+                if rate_match:
+                    client_rate = float(rate_match.group(1))
+                    # Clean the client name by removing the rate section
+                    client = raw_title.replace(rate_match.group(0), '').split('-')[0].strip()
+                else:
+                    client_rate = HOURLY_RATE
+                    client = raw_title.split('-')[0].strip()
+                    
+                amount_owed = duration_hours * client_rate
                 
                 row = [
                     start.strftime("%Y-%m-%d"),       # [A] Event Date
