@@ -664,3 +664,21 @@ I learned how to verify exactly where a command is running from on the system.
   ```bash
   which terraform
   ```
+
+  ## 1 Mar 2026: Modifying File Ownership (`chown`)
+
+I learned that permissions (`chmod`) are useless if the wrong person owns the file. The `chown` command allows me to transfer ownership of files and directories between users and groups.
+
+### 1. The Concept
+- **What:** `chown` stands for Change Owner. 
+- **Why:** If a web server (like Nginx) is hacked, the hacker assumes the identity of the `www-data` user. If my database credentials are owned by `www-data`, the hacker can read them. If they are owned by `root`, the hacker is blocked.
+
+### 2. The Command
+- **Syntax:** `chown [User]:[Group] [Filename]`
+- **Examples:**
+  - `sudo chown root:root app.py` (Changes both user and group to root).
+  - `sudo chown nginx: web_directory/` (Changes the user to nginx, and defaults to the nginx group).
+  - `sudo chown -R myuser:mygroup /var/www/` (The `-R` flag recursively changes ownership for all files inside a folder).
+
+### 3. The DevSecOps Use Case
+When deploying applications to AWS EC2, you never run the application as `root`. You create a specific, restricted user account for the application and use `chown` to ensure that account can only access its own specific files and absolutely nothing else on the system.
