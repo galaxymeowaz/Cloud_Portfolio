@@ -5,8 +5,6 @@ Automated bidirectional data synchronization pipeline built entirely on **AWS Fr
 
 This project integrates Google Calendar and Google Sheets into an event-driven AWS architecture to track client meetings and calculate billing ledgers.
 
-![Architecture Flow](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/AWS_Lambda_logo.svg/150px-AWS_Lambda_logo.svg.png) *(Consider adding an architecture diagram here!)*
-
 ## 🏗️ Architecture Design (FinOps Aligned)
 
 This infrastructure is intentionally designed using the **Principle of Least Privilege** and strictly aligns with **Zero-Cost AWS Free Tier** operations:
@@ -68,3 +66,4 @@ This infrastructure is intentionally designed using the **Principle of Least Pri
 - **IaC & Security:** Terraform, tfsec
 - **Language/Env:** Python 3.9, Docker
 - **APIs:** Google Calendar REST, Google Sheets API (`gspread`)
+
