@@ -72,11 +72,11 @@ After that, it is simple math:
 
 * 4 + 2 = **6** (meaning the access group has permission to read and write)
 
-* 4 + 1 = **6** (meaning the access group has permission to read and execute)
+* 4 + 1 = **5** (meaning the access group has permission to read and execute)
 
 * 2 + 1 = **3** (meaning the access group has permission to edit and execute)
 
-* 4 + 2 + 1 = **7** (meaning the access group has permission to edit, execute and run)
+* 4 + 2 + 1 = **7** (meaning the access group has permission to read, write, and execute)
 
 ### What I need to remember and the commands to write:
 `chmod [Owner] [Group] [Everyone]`
@@ -498,6 +498,7 @@ if git diff --cached --name-only | grep -Eq '\.env|\.pem|\.key|\.sqlite'; then
     echo "🚨 ERROR: Sensitive file detected. Commit blocked."
     exit 1
 fi
+```
 
 ## 20 Feb 2026: Linux Output Redirection (`>` vs `>>`)
 
@@ -512,6 +513,7 @@ Instead of printing command results to the screen, redirection saves that output
   ```bash
   echo "Server started" > log.txt 
   # log.txt is created and contains only this line.
+  ```
 
 ## 21 Feb 2026: Output Redirection vs. Piping with `tee`
 
@@ -648,7 +650,7 @@ I learned how to turn any standard static Linux command into a real-time, self-u
 - **Monitoring Disk Space:** `watch -n 5 df -h` (Refreshes every 5 seconds).
 - **Monitoring Active Processes:** `watch -n 2 "ps aux | grep python"` (Monitors a running Python script).
 - **Monitoring Live Logs:** `watch -n 1 tail -n 15 /var/log/auth.log` (Watches for live SSH login attempts).
-- **Monitoring RAM usage in WSL** `wcatch -n 1 free -h` (watches for RAM usage every 1 second)
+- **Monitoring RAM usage in WSL** `watch -n 1 free -h` (watches for RAM usage every 1 second)
 
 ## 28 Feb 2026: Locating Executables (`which`)
 
@@ -682,3 +684,23 @@ I learned that permissions (`chmod`) are useless if the wrong person owns the fi
 
 ### 3. The DevSecOps Use Case
 When deploying applications to AWS EC2, you never run the application as `root`. You create a specific, restricted user account for the application and use `chown` to ensure that account can only access its own specific files and absolutely nothing else on the system.
+
+## 2 Mar 2026: Data Sorting and Filtering (`sort` & `uniq`)
+
+I learned how to organize raw text data and quickly identify duplicate entries, which is a critical skill for parsing server logs and identifying anomalies.
+
+### 1. The Concept
+- **`sort`:** Organizes lines of text alphabetically or numerically.
+- **`uniq`:** Filters out adjacent duplicate lines.
+- **The Golden Rule:** `uniq` only removes duplicates if they are right next to each other. Therefore, you must *always* run data through `sort` before piping it to `uniq`.
+
+### 2. The Commands
+- **Basic Sort:** `sort access.log`
+- **Unique List:** `sort access.log | uniq` (Outputs a clean list of individual IPs).
+- **Count Duplicates (`-c`):** 
+  ```bash
+  sort access.log | uniq -c
+  ```
+"sort access.log | uniq -c | sort -nr" is used to sort out the data, hides any duplicate numbers and shows how many times the same line of IP addresses appear if I am viewing an access.log file.
+
+When I run "sort" and "uniq" it does not affect the main log file itself, it is only sorted for my view. This is important as when I want to verify what issues may happen, I can not let any evidence/clues disappear.
