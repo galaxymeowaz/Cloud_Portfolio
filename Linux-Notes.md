@@ -704,3 +704,19 @@ I learned how to organize raw text data and quickly identify duplicate entries, 
 "sort access.log | uniq -c | sort -nr" is used to sort out the data, hides any duplicate numbers and shows how many times the same line of IP addresses appear if I am viewing an access.log file.
 
 When I run "sort" and "uniq" it does not affect the main log file itself, it is only sorted for my view. This is important as when I want to verify what issues may happen, I can not let any evidence/clues disappear.
+
+## 3 Mar 2026: Troubleshooting `locate` (Missing Packages)
+
+I learned that many Linux environments (like base WSL) do not include the `locate` utility by default.
+
+### 1. The Fix
+If you get "command not found," you must install the package and initialize the database.
+- **Install:** `sudo apt install plocate`
+- **Initialize:** `sudo updatedb` (This scans the entire file system and builds the search index).
+
+### 2. Why `locate` matters
+Unlike `find`, which scans the live hard drive in real-time (slow), `locate` scans the index created by `updatedb` (instant).
+
+### 3. Usage
+- `locate [filename]` : Finds the file path instantly.
+- `locate -n 5 [filename]` : Limits output to the first 5 results.
