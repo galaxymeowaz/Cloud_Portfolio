@@ -12,3 +12,6 @@ Test/
 devsecops-pre-commit/
 automatic-accountant/app/
 
+# Automatically added by AI to prevent messy Git tracking
+server_log.txt
+Testing_Ground/

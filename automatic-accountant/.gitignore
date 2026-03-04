@@ -15,5 +15,7 @@ __pycache__/
 .env
 venv/
 
-# Ignore Google Credentials
 credentials.json 
+
+# Automatically added by AI to prevent Windows download tracking files
+*.Zone.Identifier
