@@ -720,3 +720,20 @@ Unlike `find`, which scans the live hard drive in real-time (slow), `locate` sca
 ### 3. Usage
 - `locate [filename]` : Finds the file path instantly.
 - `locate -n 5 [filename]` : Limits output to the first 5 results.
+
+## 4 Mar 2026: User & Group Management
+
+I learned how to manage identity on a Linux system, which is the foundational layer of system security.
+
+### 1. The Concept
+- **User:** A unique identity assigned to a person or a software service (e.g., `www-data` or `postgres`).
+- **Group:** A collection of users. Permissions are usually assigned to the **Group** rather than individual users to make management easier.
+
+### 2. The Commands
+- **`adduser`:** Creates a new user with a home directory.
+- **`groupadd`:** Creates a new access group.
+- **`usermod -aG [group] [user]`:** - `-a`: **A**ppend (Add to the group).
+  - `-G`: **G**roup (Specify the target group).
+
+### 3. Practical DevOps Use Case
+When deploying a multi-tier application, you create a "Service Account" (a user that isn't a real person). You then use `groupadd` to create a `web-admins` group and add your own user account to it. This allows you to deploy code without needing to log in as `root`.
