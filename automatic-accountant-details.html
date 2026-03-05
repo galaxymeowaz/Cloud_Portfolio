@@ -26,7 +26,7 @@
 
 <body>
     <header class="navbar">
-        <a href="index.html" class="logo-container" style="text-decoration: none;">
+        <a href="/" class="logo-container" style="text-decoration: none;">
             <img src="assets/AZ_Tay_Logo_New.png" alt="AZ Tay Logo" class="logo">
             <span class="logo-text">Joseph Tay</span>
         </a>
@@ -37,8 +37,8 @@
         </div>
         <nav>
             <ul class="nav-links" id="nav-links">
-                <li><a href="index.html#about" class="nav-item">About</a></li>
-                <li><a href="index.html#projects" class="nav-item">Projects</a></li>
+                <li><a href="/#about" class="nav-item">About</a></li>
+                <li><a href="/#projects" class="nav-item">Projects</a></li>
                 <li><a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank" class="nav-item">Contact</a>
                 </li>
             </ul>
@@ -46,7 +46,7 @@
     </header>
 
     <main class="details-page">
-        <a href="index.html#projects" class="back-link">← Back to Projects</a>
+        <a href="/#projects" class="back-link">← Back to Projects</a>
 
         <div class="details-content" style="max-width: 1400px; width: 100%; margin: 0 auto;">
 
@@ -119,6 +119,49 @@
                     </p>
                 </div>
 
+            </div>
+
+            <!-- Problems and Solutions Section -->
+            <div class="hardware-box"
+                style="padding: 40px; margin-bottom: 30px; border-left: 4px solid var(--accent-purple);">
+                <h2
+                    style="font-size: 2rem; margin-bottom: 20px; color: var(--text-primary); border-left: none; padding-left: 0;">
+                    Problems Faced & the Best Practices</h2>
+                <div style="color: var(--text-secondary); line-height: 1.7;">
+                    <p>During the development of this serverless pipeline, I encountered several engineering challenges
+                        that required strict adherence to AWS Cloud Best Practices to overcome completely:</p>
+
+                    <h4 style="color: var(--accent-gold); margin-top: 25px; margin-bottom: 10px; font-size: 1.2rem;">1.
+                        Authorization & Identity Management</h4>
+                    <p><strong>The Challenge:</strong> Establishing a secure connection between my AWS automation and
+                        Google APIs without hardcoding sensitive OAuth tokens directly into the application code.</p>
+                    <p><strong>The Solution:</strong> I adopted the Principle of Least Privilege by isolating all Google
+                        authentication tokens within the <strong>AWS Systems Manager Parameter Store</strong>. The
+                        Lambda execution role was explicitly granted <code
+                            style="color: var(--accent-purple);">ssm:GetParameter</code> access only to the exact
+                        securely encrypted tokens it needed, ensuring zero credential leakage.</p>
+
+                    <h4 style="color: var(--accent-gold); margin-top: 25px; margin-bottom: 10px; font-size: 1.2rem;">2.
+                        Deployment Size Limitations</h4>
+                    <p><strong>The Challenge:</strong> Standard AWS Lambda environments have a deployment package size
+                        limit (50MB zipped), but the required Google API Python libraries exceeded this when bundled
+                        traditionally.</p>
+                    <p><strong>The Solution:</strong> Rather than forcing a massive zip file, I re-architected the
+                        deployment strategy to use <strong>Docker Container Images via AWS ECR</strong>. By packaging
+                        the runtime and all dependencies into a streamlined Docker container, I circumvented the layer
+                        limits completely while also ensuring the environment remained identical between my local WSL
+                        machine and the cloud.</p>
+
+                    <h4 style="color: var(--accent-gold); margin-top: 25px; margin-bottom: 10px; font-size: 1.2rem;">3.
+                        Cold Start & Zero-Cost Constraints</h4>
+                    <p><strong>The Challenge:</strong> Guaranteeing the pipeline stayed entirely within the Free Tier
+                        limits meant avoiding any always-on compute instances (like EC2 or RDS) that might accumulate
+                        passive billing charges.</p>
+                    <p><strong>The Solution:</strong> I transitioned strictly to a Serverless Event-Driven architecture
+                        using <strong>AWS EventBridge</strong>. By triggering the execution via a serverless cron job,
+                        compute power is only spun up exactly when my calendar needs synchronizing once a day, resulting
+                        in absolute zero passive computational cost.</p>
+                </div>
             </div>
 
             <!-- Terraform IaC Section Formatting -->
@@ -212,7 +255,13 @@ resource "aws_lambda_permission" "allow_eventbridge" {
         <p>I would love to connect! Find me on <a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank"
                 class="accent-gold">LinkedIn</a> | Check out my <a href="https://github.com/galaxymeowaz"
                 target="_blank" class="accent-purple">GitHub</a></p>
-        <p class="footer-note">This website was first launched on 30 January 2026.</p>
+        <p>&copy; 2026 Joseph Tay</p>
+        <p class="footer-note">Built with HTML & Vanilla CSS</p>
+        <p class="footer-note" style="margin-top: 5px;">
+            <a href="assets/AZ_Tay_website_30_Jan_2026.png" target="_blank"
+                style="color: var(--text-secondary); text-decoration: none; border-bottom: 1px dashed var(--text-secondary);">This
+                website was first launched on 30 January 2026.</a>
+        </p>
     </footer>
 
     <script src="script.js"></script>

@@ -394,6 +394,12 @@ body {
     color: var(--text-secondary);
 }
 
+.details-content img,
+.details-content pre {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
 .details-content ul {
     margin-bottom: 25px;
     padding-left: 20px;
@@ -493,6 +499,10 @@ footer {
 
     .nav-links li {
         margin: 20px 0;
+    }
+
+    .nav-links a {
+        color: #fff;
     }
 
     .hero h1 {
