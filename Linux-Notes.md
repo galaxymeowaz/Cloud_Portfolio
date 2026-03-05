@@ -737,3 +737,17 @@ I learned how to manage identity on a Linux system, which is the foundational la
 
 ### 3. Practical DevOps Use Case
 When deploying a multi-tier application, you create a "Service Account" (a user that isn't a real person). You then use `groupadd` to create a `web-admins` group and add your own user account to it. This allows you to deploy code without needing to log in as `root`.
+
+## 5 Mar 2026: System Hardware Inspection
+
+I learned how to check the system resources of a Linux instance using built in tools.
+
+### 1. The Concept
+- **`lscpu`**: Shows the CPU architecture, core counts, and vendor info.
+- **`lsblk`**: Displays all block devices (Hard drives, partitions, and external disks).
+- **`free -h`**: Provides a real-time summary of Physical RAM and Swap usage.
+
+### 2. Why this matters for DevOps/FinOps
+- **Scaling:** If `lscpu` shows only 1 core but your application is multi-threaded, your server is a bottleneck.
+- **FinOps:** Checking `lsblk` helps verify if your storage volume (EBS on AWS) is correctly mounted. If a volume isn't listed here, your application will crash.
+- **Troubleshooting:** If your server is "laggy," checking `free -h` helps identify if you have run out of RAM and are hitting the "Swap" file (which is much slower than RAM).
