@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Automatic Accountant - Zero Cost AWS Data Pipeline</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="A fully serverless, zero-cost AWS data pipeline built with Terraform and Docker that automatically syncs Google Calendar to Google Sheets.">
+    <meta name="keywords"
+        content="AWS Lambda, Terraform, Infrastructure as Code, Docker, Python, Zero Trust Security, FinOps, Data Pipeline">
+    <meta name="author" content="Joseph Tay">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Automatic Accountant - Zero Cost AWS Pipeline">
+    <meta property="og:description"
+        content="A fully serverless, zero-cost AWS data pipeline built with Terraform and Docker that automatically syncs Google Calendar to Google Sheets.">
+
+    <link rel="icon" type="image/png" href="assets/AZ_Tay_Logo_New.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo-container" style="text-decoration: none;">
+            <img src="assets/AZ_Tay_Logo_New.png" alt="AZ Tay Logo" class="logo">
+            <span class="logo-text">Joseph Tay</span>
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#about" class="nav-item">About</a></li>
+                <li><a href="index.html#projects" class="nav-item">Projects</a></li>
+                <li><a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank" class="nav-item">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="details-page">
+        <a href="index.html#projects" class="back-link">← Back to Projects</a>
+
+        <div class="details-content" style="max-width: 1400px; width: 100%; margin: 0 auto;">
+
+            <!-- Hero Header for Project -->
+            <div class="hardware-box"
+                style="padding: 40px; text-align: center; border-bottom: 3px solid var(--accent-gold); margin-bottom: 30px;">
+                <span class="badge badge-gold" style="margin-bottom: 15px;">FINOPS & DEVOPS PROJECT</span>
+                <h1 style="font-size: 3rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">The
+                    Automatic Accountant</h1>
+                <p
+                    style="font-size: 1.1rem; color: var(--text-secondary); max-width: 900px; margin: 0 auto; line-height: 1.8;">
+                    I was spending too much time manually migrating my consulting appointments from Google Calendar to
+                    Google Sheets. I originally planned to build this project on a Raspberry PI, but hardware prices
+                    have
+                    increased quite a bit. Plus, I wanted more hands-on experience working with Cloud projects
+                    (specifically
+                    learning how to work with Terraform and Docker). So, I decided to try building this pipeline using
+                    AWS,
+                    Lambda, Docker, Terraform, and Antigravity.
+                </p>
+
+                <div style="margin-top: 30px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://github.com/galaxymeowaz/Cloud_Portfolio/tree/main/automatic-accountant/"
+                        class="btn btn-secondary" target="_blank" style="padding: 10px 20px;">View Repository</a>
+                    <a href="automatic-accountant-setup.html" class="btn btn-primary" style="padding: 10px 20px;">Read
+                        Setup Guide</a>
+                </div>
+            </div>
+
+            <!-- 1-Column Grid for Motivation & Security stacked -->
+            <div style="display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 30px;">
+
+                <!-- Security Card -->
+                <div class="hardware-box" style="padding: 30px;">
+                    <h2
+                        style="font-size: 1.5rem; color: var(--accent-purple); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+                        Security & Strategy</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.7;">
+                        This is my very first major project. I tried hard to do my own research while also learning more
+                        about strict zero-trust security principles. There might still be a few bugs, but I am crossing
+                        my fingers there won't be!
+                    </p>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-top: 15px;">
+                        During the development process, I occasionally used AI as a research tool to help improve my
+                        coding
+                        efficiency. However, I made sure to actively learn the core concepts, especially regarding the
+                        Cloud provisioning sections.
+                        I allowed the AI to help write the bulk of the logic, but I tried my absolute best to study the
+                        mechanics along the way.
+                        I believe in using AI as a teacher, not as something to just do all the work for me.
+                    </p>
+                </div>
+
+                <!-- FinOps Card -->
+                <div class="hardware-box" style="padding: 30px;">
+                    <h2
+                        style="font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+                        Zero-Cost Objective</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.7;">
+                        While working on this pipeline, I was determined to keep it at zero cost since it's a personal
+                        project. When I enter the job market, I want to be able to architect systems that save companies
+                        as much money as possible while staying completely secure. Like I mentioned, there might still
+                        be
+                        some minor flaws as I am very new to this field, and I would gladly appreciate any feedback on
+                        my approach!
+                    </p>
+                    <p style="color: var(--text-secondary); line-height: 1.7; margin-top: 15px;">
+                        I structured everything securely using Terraform to provision the AWS resources (Lambda,
+                        EventBridge, IAM, ECR, etc.) cleanly.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Terraform IaC Section Formatting -->
+            <div class="hardware-box"
+                style="padding: 40px; margin-bottom: 30px; border-left: 4px solid var(--accent-gold);">
+                <h2 style="font-size: 2rem; margin-bottom: 20px;">Infrastructure as Code Documentation</h2>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                    <div style="color: var(--text-secondary); line-height: 1.7;">
+                        <p>To ensure this deployment is completely reproducible with no manual clicks, I relied heavily
+                            on Terraform to provision the cloud architecture. Terraform code is written in HashiCorp
+                            Configuration Language (HCL),
+                            which is highly declarative and easy to read.</p>
+                        <p style="margin-top: 15px;">For instance, to trigger the AWS Lambda automatically every single
+                            day, an AWS
+                            EventBridge cron job is used. The proper way to code this connection requires
+                            separating the timing schedule from the target mapping. The <code
+                                style="color: var(--accent-purple);">aws_cloudwatch_event_rule</code> resource dictates
+                            the execution time, while the <code
+                                style="color: var(--accent-purple);">aws_cloudwatch_event_target</code> bonds that
+                            schedule to our specific Lambda ARN. Finally, a strict Identity and Access Management (IAM)
+                            <code style="color: var(--accent-purple);">aws_lambda_permission</code> block is required to
+                            securely validate EventBridge's authority to actually invoke the function.
+                        </p>
+                    </div>
+
+                    <pre
+                        style="background: #080808; padding: 20px; border: 1px solid #333; overflow-x: auto; border-radius: 0; margin-top: 10px;"><code class="tech-font" style="color: #e0e0e0;"># --- EventBridge Target for Ledger Sync ---
+resource "aws_cloudwatch_event_rule" "daily_ledger_sync" {
+  name                = "daily_ledger_sync_rule"
+  description         = "Trigger Ledger Sync Lambda daily"
+  schedule_expression = "rate(1 day)"
+}
+
+resource "aws_cloudwatch_event_target" "ledger_sync_target" {
+  rule      = aws_cloudwatch_event_rule.daily_ledger_sync.name
+  target_id = "LedgerSyncLambdaTarget"
+  arn       = aws_lambda_function.ledger_sync.arn
+}
+
+resource "aws_lambda_permission" "allow_eventbridge" {
+  statement_id  = "AllowExecutionFromEventBridge"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.ledger_sync.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.daily_ledger_sync.arn
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Technologies Grid instead of just bullet points -->
+            <div style="margin-bottom: 20px;">
+                <h2 style="font-size: 1.8rem; text-align: center; margin-bottom: 30px; text-transform: uppercase;">
+                    Technical Stack</h2>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; text-align: center;">
+                    <div class="hardware-box" style="padding: 20px; border-bottom: 2px solid var(--accent-gold);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">☁️</div>
+                        <h4 style="color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px;">Cloud
+                            Environment</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;" class="tech-font">
+                            AWS Lambda<br>EventBridge, IAM<br>ECR, Cloudwatch</p>
+                    </div>
+                    <div class="hardware-box" style="padding: 20px; border-bottom: 2px solid var(--accent-purple);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🔒</div>
+                        <h4 style="color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px;">IaC &
+                            Security</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;" class="tech-font">
+                            Terraform<br>tfsec</p>
+                    </div>
+                    <div class="hardware-box" style="padding: 20px; border-bottom: 2px solid var(--text-secondary);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📦</div>
+                        <h4 style="color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px;">Runtime
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;" class="tech-font">
+                            Python 3.9<br>Docker</p>
+                    </div>
+                    <div class="hardware-box" style="padding: 20px; border-bottom: 2px solid var(--accent-gold);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🔌</div>
+                        <h4 style="color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px;">
+                            Integrations (APIs)</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;" class="tech-font">
+                            Google Calendar REST<br>Google Sheets API</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>I would love to connect! Find me on <a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank"
+                class="accent-gold">LinkedIn</a> | Check out my <a href="https://github.com/galaxymeowaz"
+                target="_blank" class="accent-purple">GitHub</a></p>
+        <p class="footer-note">This website was first launched on 30 January 2026.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

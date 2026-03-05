@@ -1,45 +1,164 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
 
-        <title> [Joseph Tay] - Cloud Portfolio </title>
-                <meta charset="UTF-8">
-        <style>
-            body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-            h1 { color: #232f3e; } /* Amazon Dark Blue */
-        </style>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph Tay - Cloud Engineer & DevOps Portfolio</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Joseph Tay's professional portfolio. Discover my journey into Cloud Computing, DevOps, AWS architecture, Terraform, and zero-cost serverless applications.">
+    <meta name="keywords"
+        content="Joseph Tay, Cloud Engineer, DevOps Engineer, AWS, Terraform, Docker, FinOps, Cloud Portfolio, Serverless, Automation">
+    <meta name="author" content="Joseph Tay">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Joseph Tay - Cloud Engineer & DevOps Portfolio">
+    <meta property="og:description"
+        content="Welcome to my professional portfolio. Discover my journey into Cloud Computing, DevOps, AWS, and zero cost architecture.">
+    <meta property="og:site_name" content="Joseph Tay Portfolio">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Joseph Tay - Cloud Engineer Portfolio">
+    <meta name="twitter:description"
+        content="Explore my Cloud Engineering projects, AWS infrastructure, and Terraform deployments.">
+
+    <link rel="icon" type="image/png" href="assets/AZ_Tay_Logo_New.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
 
 <body>
-    
-    <h1>Hello, I am Joseph Tay (v3 - Automated)</h1>
-    <h3>Aspiring DevOps & Cloud Engineer</h3>
-    <hr width="50%">
+    <header class="navbar">
+        <a href="index.html" class="logo-container" style="text-decoration: none;">
+            <img src="assets/AZ_Tay_Logo_New.png" alt="AZ Tay Logo" class="logo">
+            <span class="logo-text">Joseph Tay</span>
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="nav-item">About</a></li>
+                <li><a href="#skills" class="nav-item">Skills</a></li>
+                <li><a href="#projects" class="nav-item">Projects</a></li>
+                <li><a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank" class="nav-item">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-    <p>
-        Welcome to my cloud portfolio.
-        This page is hosted entirely on <strong>AWS S3</strong>
-    </p>
+    <main>
+        <section id="about" class="hero">
+            <h1>Hi, I'm <span class="accent-gold">Joseph Tay</span></h1>
+            <h3>Aspiring Cloud Engineer and DevOps Engineer</h3>
+            <p>Welcome to my portfolio! I built this space to share my journey into Cloud Computing and DevOps. I am
+                very passionate about learning the best practices for saving costs (FinOps) and prioritizing maximum
+                security.
+                My goal is to help companies improve their efficiency, build reliable systems, and maximize their
+                success. This entire site is actually deployed automatically using GitHub Actions, pushing fresh code
+                straight to AWS—it's a great way for me to practice exactly what I learn!</p>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">View My Projects</a>
+                <a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank" class="btn btn-secondary">Let's
+                    Connect</a>
+            </div>
+        </section>
 
-</p> 
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="content-section">
+            <h2 class="section-title">Skills</h2>
+            <p
+                style="text-align: center; margin-bottom: 40px; color: var(--text-secondary); max-width: 800px; margin-left: auto; margin-right: auto;">
+                These are the core technologies I use every day to build strong, reliable systems. I love bringing
+                diverse platforms together to architect solutions that simply work. My primary goal is to construct
+                secure, scalable foundations that companies can truly depend on.
+            </p>
+            <div class="skills-grid">
+                <div class="skill-card hardware-box">
+                    <div class="skill-icon">🔒</div>
+                    <h3 class="skill-title">Security & Zero-Trust</h3>
+                    <p class="skill-desc">I believe security should always come first. I love designing setups where
+                        data stays safe by default, following strict "Zero-Trust" guidelines so you never have to worry
+                        about the basics.</p>
+                    <span class="badge badge-purple">FOUNDATION</span>
+                </div>
+                <div class="skill-card hardware-box">
+                    <div class="skill-icon">⚙️</div>
+                    <h3 class="skill-title">Infrastructure as Code (IaC)</h3>
+                    <p class="skill-desc">I use Terraform to turn complex server setups into simple, readable code. This
+                        means we can deploy entire systems with a single click, completely avoiding human errors and
+                        saving tons of setup time.</p>
+                    <span class="badge badge-gold">AUTOMATION</span>
+                </div>
+                <div class="skill-card hardware-box">
+                    <div class="skill-icon" style="font-family: monospace; font-weight: bold;">>_</div>
+                    <h3 class="skill-title">Linux & Automation</h3>
+                    <p class="skill-desc">Linux is my primary engineering environment. I actively develop custom
+                        Bash scripts to automate routine administrative tasks, like systematic backups and
+                        environment provisioning. This saves a lot of time and lets me focus on solving more complex
+                        problems instead of doing manual work.</p>
+                    <span class="badge badge-grey">SYSTEMS</span>
+                </div>
+            </div>
+        </section>
 
-<h3>My Current Project</h3>
-<ul style="list-style-type: none; padding: 0;">
-    <li>🔸 <strong> Static Website:</strong> Deployed on S3 (You are here)</li>
-    <li>🔸 <strong>Linux Automation:</strong> Bash scripting via WSL</li>
-    <li>🔸 <strong>AWS Architecture:</strong> Designing VPC's (In Progress)</li>
-</ul>
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="content-section">
+            <h2 class="section-title">Projects</h2>
+            <p
+                style="text-align: center; margin-bottom: 40px; color: var(--text-secondary); max-width: 800px; margin-left: auto; margin-right: auto;">
+                This is where I put my skills into practice. I strongly believe in the importance of cost-optimization
+                (FinOps). My ultimate ambition is to engineer professional-grade cloud applications that cost little to
+                nothing to run. By doing this, I hope to help organizations use their budget more efficiently while
+                enhancing overall system reliability and performance.
+            </p>
+            <div class="projects-grid">
+                <div class="project-card hardware-box cursor-pointer"
+                    onclick="window.location.href='automatic-accountant-details.html'">
+                    <span class="badge badge-gold" style="margin-top: 0; margin-bottom: 15px;">FINOPS</span>
+                    <h3 class="project-title">The Automatic Accountant</h3>
+                    <p class="project-desc">To solve the inefficiencies of manual data entry, I architected an
+                        AWS-native solution to automate my calendar synchronization. Built using Docker and Terraform,
+                        this serverless integration runs smoothly and reliably—entirely within the AWS Free Tier
+                        limitations.</p>
+                    <div class="tech-font" style="margin-top: 15px;">AWS | IaC</div>
+                    <a href="automatic-accountant-details.html" class="btn btn-secondary"
+                        style="margin-top: 20px; width: 100%; text-align: center;">Learn More &rarr;</a>
+                </div>
+                <div class="project-card hardware-box">
+                    <span class="badge badge-purple" style="margin-top: 0; margin-bottom: 15px;">SYSTEMS</span>
+                    <h3 class="project-title">Linux Automation Scripts</h3>
+                    <p class="project-desc">A curated repository of personalized Bash scripts engineered to optimize my
+                        workflow within Ubuntu. These scripts handle crucial background operations, like keeping
+                        my local environment secure, properly backed up, and continually ready for action.</p>
+                    <div class="tech-font" style="margin-top: 15px;">BASH | WSL</div>
+                </div>
+                <div class="project-card hardware-box">
+                    <span class="badge badge-gold" style="margin-top: 0; margin-bottom: 15px;">DEVOPS</span>
+                    <h3 class="project-title">Cloud Portfolio</h3>
+                    <p class="project-desc">The infrastructure hosting this very portfolio. I configured a strong
+                        continuous integration and continuous deployment (CI/CD) pipeline to guarantee that all source
+                        code commits are automatically tested and published straight to AWS.</p>
+                    <div class="tech-font" style="margin-top: 15px;">CI/CD | AWS</div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  <br> 
-  <p>
-    Connect with me on
-    <a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank">LinkedIn</a> 
-    /
-    Please message me on LinkedIn to view my Github account
-    
-</p>
+    <footer>
+        <p>I would love to connect! Find me on <a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank"
+                class="accent-gold">LinkedIn</a> | Check out my <a href="https://github.com/galaxymeowaz"
+                target="_blank" class="accent-purple">GitHub</a></p>
+        <p class="footer-note">This website was first launched on 30 January 2026.</p>
+    </footer>
 
-    <p><em>This website was first uploaded on 30 January 2026</em></p>
+    <script src="script.js"></script>
+</body>
 
-  </body>
-  </html>
+</html>

@@ -1,0 +1,517 @@
+/* Typography and General Setup */
+:root {
+    --bg-dark: #080808;
+    /* Pure dark base for Tron aesthetic */
+    --pane-bg: #121015;
+    /* Solid dark, no transparency/blur */
+    --pane-border: #c39b56;
+    /* Solid gold/brass border for steampunk */
+
+    --accent-gold: #c39b56;
+    --accent-purple: #905bc2;
+    --text-primary: #e0e0e0;
+    --text-secondary: #9a9a9a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: auto;
+    /* Removed smooth scroll if it causes lag */
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    /* Sharp, high-contrast grid lines, NO linear gradients parsing every frame */
+    background-image:
+        linear-gradient(#151515 1px, transparent 1px),
+        linear-gradient(90deg, #151515 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center;
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+    border-left: 1px solid #1f1f1f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-purple);
+    border-radius: 0;
+    /* Sharp corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-gold);
+}
+
+/* Typography Utility */
+.accent-gold {
+    color: var(--accent-gold);
+    /* No text shadow */
+}
+
+.accent-purple {
+    color: var(--accent-purple);
+}
+
+.tech-font {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Hardware Box (Replaces Glass Panel) */
+.hardware-box {
+    background: var(--pane-bg);
+    border: 1px solid var(--pane-border);
+    /* Cut corner effect via clip-path for Tron/Steampunk hybrid */
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    position: relative;
+    box-shadow: none;
+    /* No laggy box-shadows */
+    transition: transform 0.1s ease-out;
+    /* Ultra fast transition */
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: #080808;
+    /* Solid color, no backdrop-filter blur! */
+    border-bottom: 2px solid var(--accent-purple);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 45px;
+    height: auto;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-gold);
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 2000;
+    margin-top: 5px;
+    /* Adjust alignment to visual center alongside logo */
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--accent-gold);
+    border-radius: 0;
+    transition: all 0.3s ease;
+}
+
+/* Buttons */
+.btn-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 50px;
+    /* Centered and lowered */
+}
+
+.btn {
+    padding: 12px 28px;
+    border-radius: 0;
+    /* Sharp mechanical corners */
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: var(--accent-purple);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--bg-dark);
+    color: var(--accent-purple);
+    border-color: var(--accent-purple);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--accent-gold);
+    border-color: var(--accent-gold);
+}
+
+.btn-secondary:hover {
+    background: var(--accent-gold);
+    color: var(--bg-dark);
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 0;
+    /* Sharp */
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 15px;
+    border-left: 4px solid;
+}
+
+.badge-gold {
+    background: #1a1a1a;
+    color: var(--accent-gold);
+    border-left-color: var(--accent-gold);
+}
+
+.badge-purple {
+    background: #1a1a1a;
+    color: var(--accent-purple);
+    border-left-color: var(--accent-purple);
+}
+
+.badge-grey {
+    background: #1a1a1a;
+    color: var(--text-secondary);
+    border-left-color: var(--text-secondary);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 5% 40px;
+    /* Added significant padding-top so the fixed header doesn't cover title */
+    margin: 0 auto;
+    position: relative;
+    max-width: 900px;
+    background: transparent;
+    border: none;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.hero h3 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    max-width: 650px;
+    color: var(--text-secondary);
+}
+
+/* Section Common */
+.content-section {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #222;
+    padding-bottom: 15px;
+}
+
+/* Projects Grid */
+.projects-grid,
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.project-card,
+.skill-card {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.project-card:hover {
+    transform: scale(1.02);
+    /* Very subtle, no heavy shadow calculation */
+    border-color: var(--accent-purple);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.project-icon,
+.skill-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--accent-gold);
+}
+
+.project-title,
+.skill-title {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.project-desc,
+.skill-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+/* Skills/Linux Section Specifics */
+.skill-card {
+    border-color: var(--accent-purple);
+}
+
+.skill-card:hover {
+    border-color: var(--accent-gold);
+}
+
+/* Account Details Page Adjustments */
+.details-page {
+    padding-top: 120px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.details-content {
+    padding: 50px;
+    margin-top: 30px;
+    border-top: 4px solid var(--accent-gold);
+    /* Solid mechanical top */
+}
+
+.details-content h1 {
+    margin-bottom: 20px;
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+.details-content h2 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: var(--accent-purple);
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    border-left: 4px solid var(--accent-gold);
+    padding-left: 15px;
+}
+
+.details-content p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.details-content ul {
+    margin-bottom: 25px;
+    padding-left: 20px;
+    color: var(--text-secondary);
+}
+
+.details-content li {
+    margin-bottom: 10px;
+}
+
+.details-content a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-gold);
+}
+
+.details-content a:hover {
+    background: var(--accent-gold);
+    color: #000;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.back-link:hover {
+    color: var(--accent-gold);
+}
+
+/* Optimized Animations (Opacity Only) */
+.reveal-item {
+    opacity: 0;
+    /* Only transition opacity, no transforms to prevent GPU layout recalculations */
+    transition: opacity 0.4s ease-in;
+}
+
+.reveal-item.revealed {
+    opacity: 1;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 2px solid #222;
+    margin-top: 50px;
+    background: #080808;
+}
+
+.footer-note {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 15px;
+    font-family: 'Consolas', monospace;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 100%;
+        background-color: var(--bg-dark);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* Center the links again */
+        padding-right: 0;
+        /* Remove right padding since it's centered */
+        transition: right 0.4s ease;
+        z-index: 1500;
+        border-left: 2px solid var(--accent-purple);
+        /* Add back purple grid lines much stronger, as per user request */
+        background-image:
+            linear-gradient(rgba(144, 91, 194, 0.4) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(144, 91, 194, 0.4) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .hero h1 {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .details-content {
+        padding: 30px 20px;
+    }
+}

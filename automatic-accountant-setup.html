@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Accountant Setup - Cloud & DevOps FinOps Architecture</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="The ultimate setup guide for the Automatic Accountant zero-cost serverless architecture. Learn how to deploy AWS EventBridge, Lambda, and Terraform easily.">
+    <meta name="keywords"
+        content="AWS, Terraform Setup, Google Cloud, FinOps, Docker, Serverless Portfolio Project, Identity and Access Management">
+    <meta name="author" content="Joseph Tay">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Automatic Accountant Setup - Cloud & DevOps Architecture">
+    <meta property="og:description"
+        content="The ultimate setup guide for the Automatic Accountant zero-cost serverless architecture. Learn how to deploy AWS EventBridge, Lambda, and Terraform easily.">
+
+    <link rel="icon" type="image/png" href="assets/AZ_Tay_Logo_New.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo-container" style="text-decoration: none;">
+            <img src="assets/AZ_Tay_Logo_New.png" alt="AZ Tay Logo" class="logo">
+            <span class="logo-text">Joseph tay</span>
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#about" class="nav-item">About</a></li>
+                <li><a href="index.html#projects" class="nav-item">Projects</a></li>
+                <li><a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank" class="nav-item">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="details-page">
+        <a href="automatic-accountant-details.html" class="back-link">← Back to Project Details</a>
+
+        <div class="details-content hardware-box reveal-item" style="max-width: 900px;">
+            <h1>Automatic Accountant: Ultimate Setup Guide</h1>
+            <p style="font-size: 0.9rem; margin-top: -15px; margin-bottom: 30px;"><em>Created by Joseph Tay | Licensed
+                    under the MIT License.</em></p>
+
+            <p>This comprehensive guide serves as a manual for setting up the <strong>Automatic Accountant</strong>
+                pipeline from scratch. When transitioning from a dummy test account to actual business accounts, follow
+                these sequential steps to establish the required Cloud APIs, connect the environment variables, and
+                deploy the infrastructure to AWS.</p>
+
+            <h2>🛠️ Prerequisites</h2>
+            <p>Before proceeding, ensure the following tools are present in your development environment:</p>
+            <ol style="margin-bottom: 25px; padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 15px;"><strong>Python 3.9+:</strong> The core runtime language.</li>
+                <li style="margin-bottom: 15px;"><strong>Docker:</strong> Containerizes the application for identical
+                    local and cloud execution.</li>
+                <li style="margin-bottom: 15px;"><strong>Terraform:</strong> Infrastructure as Code (IaC) tool utilized
+                    to automatically provision cloud servers by reading the <code>main.tf</code> configuration.</li>
+                <li style="margin-bottom: 15px;"><strong>AWS CLI:</strong> Enables secure terminal communication with
+                    Amazon Web Services.</li>
+                <li style="margin-bottom: 15px;"><strong>Git/VSCode:</strong> For modifying source code and environment
+                    variable (.env) configurations.</li>
+            </ol>
+
+            <hr style="border: none; border-top: 1px solid #333; margin: 40px 0;">
+
+            <h2>📌 Phase 1: Google Cloud Platform (GCP) Setup</h2>
+            <p>To grant the application required access to Google Calendar and Google Sheets without exposing a personal
+                password, a secure "Service Account" (Robot User) must be created within the Google Cloud Platform.</p>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Step 1.1: Project Initialization</h3>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li>Navigate to the Google Cloud Console.</li>
+                <li>Select the <strong>Project Dropdown</strong> (top left) and click <strong>New Project</strong>.</li>
+                <li>Assign the name <code>Automatic Accountant</code> and select <strong>Create</strong>.</li>
+            </ul>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Step 1.2: API Enablement</h3>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li>In the sidebar, select <strong>APIs & Services > Library</strong>.</li>
+                <li>Search for and <strong>Enable</strong> both the <strong>Google Calendar API</strong> and the
+                    <strong>Google Sheets API</strong>.
+                </li>
+            </ul>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Step 1.3: Service Account Generation</h3>
+            <ul style="padding-left: 20px; color: var(--text-secondary); margin-bottom: 20px;">
+                <li>Navigate to <strong>APIs & Services > Credentials</strong>.</li>
+                <li>Select <strong>+ CREATE CREDENTIALS > Service account</strong>.</li>
+                <li>Name the account "Billing Robot" and assign the <strong>Basic > Editor</strong> role.</li>
+                <li>Copy the generated Service Account email address.</li>
+            </ul>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Step 1.4: Credential Extraction</h3>
+            <ul style="padding-left: 20px; color: var(--text-secondary); margin-bottom: 30px;">
+                <li>Under the Service Account details, navigate to the <strong>KEYS</strong> tab.</li>
+                <li>Select <strong>ADD KEY > Create new key > JSON</strong>.</li>
+                <li>Relocate the downloaded file into the <code>automatic-accountant</code> project directory and rename
+                    it precisely to <code>credentials.json</code>.</li>
+            </ul>
+
+            <hr style="border: none; border-top: 1px solid #333; margin: 40px 0;">
+
+            <h2>📌 Phase 2: Integration Configuration</h2>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Step 2.1: Authorization</h3>
+            <p>Google enforces strict privacy defaults. The service account requires explicit invitations to access the
+                necessary files.</p>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li>In <strong>Google Calendar</strong>, navigate to "Settings and sharing", add the service account
+                    email, and grant "See all event details" permission.</li>
+                <li>In <strong>Google Sheets</strong>, click the "Share" button and invite the service account email as
+                    an "Editor".</li>
+            </ul>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Step 2.2: Identifying Unique IDs</h3>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li><strong>Calendar ID:</strong> Located in Calendar "Settings". Typically formatted as
+                    <code>c_xyz...@group.calendar.google.com</code>.
+                </li>
+                <li><strong>Spreadsheet ID:</strong> Extracted from the Sheet's URL (the string directly following
+                    <code>/d/</code>).
+                </li>
+            </ul>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Step 2.3: Data Structure Formatting</h3>
+            <p>The target Google Sheet must contain the following exact headers in Row 1 (A1 to G1) to parse incoming
+                matrix data correctly:</p>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li><code>Event Date</code> | <code>Client</code> | <code>Service</code> | <code>Amount Owed</code> |
+                    <code>Status</code> | <code>Payment Received Date</code> | <code>Comments (Manual Entry)</code>
+                </li>
+            </ul>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Step 2.4: Event Syntax Standards</h3>
+            <p>When scheduling, the logic evaluates the <strong>Event Title</strong> utilizing strict formatting rules:
+            </p>
+            <p><code>Client Name [$Rate] - Service Type</code></p>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li><strong>Dynamic Rates:</strong> Encapsulate precise rates within brackets or parentheses (e.g.,
+                    <code>[$250]</code>). If omitted, the system falls back to the .env <code>HOURLY_RATE</code>.
+                </li>
+                <li><strong>Service Type:</strong> Delimit with a hyphen (e.g., <code>- Consulting</code>).</li>
+                <li><strong>Time Bounds:</strong> "All-Day" events are incompatible; explicit start and end times are
+                    required for duration-based calculations.</li>
+            </ul>
+
+            <hr style="border: none; border-top: 1px solid #333; margin: 40px 0;">
+
+            <h2>📌 Phase 3: Amazon Web Services (AWS) Provisioning</h2>
+            <p>AWS serves as the execution layer. To maintain security, an Identity and Access Management (IAM) User
+                must be provisioned following strict "Least Privilege" protocols.</p>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Step 3.1 & 3.2: Terraform Deployment Identity</h3>
+            <p>Create an IAM User specifically for Terraform execution (e.g., <code>terraform-admin</code>), providing
+                CLI access exclusively. Attach a custom JSON policy that singularly permits Lambda, EventBridge, ECR,
+                and local IAM Role creation, explicitly preventing account-wide escalation commands.</p>
+
+            <hr style="border: none; border-top: 1px solid #333; margin: 40px 0;">
+
+            <h2>📌 Phase 4 & 5: Environment Variables & Deployment</h2>
+
+            <p>Construct the <code>.env</code> file within the root directory utilizing the compiled IDs and Keys:</p>
+            <pre
+                style="background: #080808; padding: 15px; border-left: 2px solid var(--accent-purple); overflow-x: auto; margin-bottom: 20px;"><code class="tech-font" style="color: #e0e0e0;">GOOGLE_SHEETS_SPREADSHEET_ID=1BxiMVs0X_xxxxxxxxxxxxxxxxxxx
+AWS_ACCESS_KEY_ID=AKIA...
+AWS_SECRET_ACCESS_KEY=skJhg...
+HOURLY_RATE=150
+CALENDAR_ID=c_xyz123@group.calendar.google.com
+SYNC_DAYS_BACK=1</code></pre>
+
+            <h3 style="color: var(--accent-gold); margin-top: 25px;">Final Execution</h3>
+            <p>1. Validate logic locally utilizing <code>./test_locally.sh</code>.</p>
+            <p>2. Provision the AWS infrastructure using Terraform:</p>
+            <pre
+                style="background: #080808; padding: 15px; border-left: 2px solid var(--accent-gold); overflow-x: auto; margin-bottom: 20px;"><code class="tech-font" style="color: #e0e0e0;">terraform init
+terraform plan
+terraform apply</code></pre>
+
+            <p>3. Authenticate Docker with AWS, build the image (enforcing AMD64 architecture for cloud compatibility),
+                and push the container to the newly provisioned Elastic Container Registry (ECR).</p>
+            <p><em>The system is now fully automated via AWS EventBridge.</em></p>
+
+            <hr style="border: none; border-top: 1px solid #333; margin: 40px 0;">
+
+            <h2>📌 Phase 6: Infrastructure Teardown</h2>
+            <p>To systematically eradicate the architecture and prevent any potential Free Tier billing overages:</p>
+            <ol style="margin-bottom: 25px; padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 10px;">Navigate to the AWS Console (ECR) and manually delete all hosted Docker
+                    images (Terraform will abort destruction if images remain).</li>
+                <li style="margin-bottom: 10px;">Execute <code>terraform destroy</code> within the project directory to
+                    dismantle all connected CloudWatch rules, IAM profiles, and Lambda containers.</li>
+            </ol>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>I would love to connect! Find me on <a href="https://www.linkedin.com/in/joseph-tay-az/" target="_blank"
+                class="accent-gold">LinkedIn</a> | Check out my <a href="https://github.com/galaxymeowaz"
+                target="_blank" class="accent-purple">GitHub</a></p>
+        <p class="footer-note">This website was first launched on 30 January 2026.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
