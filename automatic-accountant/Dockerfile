@@ -8,7 +8,7 @@ FROM public.ecr.aws/lambda/python:3.9
 
 # 2. Copy dependencies if required
 COPY requirements.txt ./
-RUN pip install -r requirements.txt || true
+RUN pip install -r requirements.txt
 
 # 3. Copy your local Python scripts into the container's designated task root
 COPY calendar_sync.py ${LAMBDA_TASK_ROOT}

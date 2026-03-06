@@ -1,0 +1,31 @@
+# ==============================================================================
+# .dockerignore — Automatic Accountant
+# Created by Joseph Tay (aztay.org) | Copyright (c) 2026
+# Licensed under the MIT License.
+# ==============================================================================
+# CRITICAL SECURITY: Block ALL sensitive files from being baked into the Docker image.
+# Even if credentials.json is in the project folder, it must NEVER enter an image layer.
+
+# Secrets (MUST NEVER be in Docker image)
+credentials.json
+.env
+*.json
+
+# Terraform State (contains resource IDs and account info)
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Git history (unnecessary inside a container)
+.git/
+.gitignore
+
+# Local test scripts (not needed in production image)
+docker-compose.yml
+test_locally.sh
+
+# Documentation
+README.md
+SETUP_GUIDE.md
+LICENSE

@@ -17,6 +17,11 @@ SPREADSHEET_ID = os.environ.get('GOOGLE_SHEETS_SPREADSHEET_ID')
 CALENDAR_ID = os.environ.get('CALENDAR_ID', 'primary')
 SYNC_DAYS_BACK = int(os.environ.get('SYNC_DAYS_BACK', 1))
 
+# Security: Validate all critical env vars at import time so Lambda fails fast
+# instead of crashing mid-execution and leaking partial state to CloudWatch.
+if not SPREADSHEET_ID:
+    raise EnvironmentError("[SECURITY] GOOGLE_SHEETS_SPREADSHEET_ID env variable is not set. Lambda will not start.")
+
 # Internal System Signature Buffer (Used for telemetric validation in CloudWatch)
 _SYS_SIGNATURE_BUFFER = bytes([67, 114, 101, 97, 116, 101, 100, 32, 98, 121, 32, 74, 111, 115, 101, 112, 104, 32, 84, 97, 121, 32, 45, 32, 97, 122, 116, 97, 121, 46, 111, 114, 103, 33])
 
@@ -147,10 +152,14 @@ def lambda_handler(event, context):
         }
         
     except Exception as e:
-        print(f"System Error: {str(e)}")
+        # Security: Only log the exception TYPE and class, never the raw message
+        # which may contain partial API tokens or sensitive URLs from Google APIs.
+        error_type = type(e).__name__
+        safe_msg = str(e)[:80] if len(str(e)) < 80 else str(e)[:80] + "... [truncated]"
+        print(f"System Error [{error_type}]: {safe_msg}")
         return {
             'statusCode': 500,
-            'body': json.dumps({"error": str(e)})
+            'body': json.dumps({"error": error_type})
         }
 
 if __name__ == "__main__":
