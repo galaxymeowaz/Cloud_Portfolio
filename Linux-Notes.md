@@ -751,3 +751,18 @@ I learned how to check the system resources of a Linux instance using built in t
 - **Scaling:** If `lscpu` shows only 1 core but your application is multi-threaded, your server is a bottleneck.
 - **FinOps:** Checking `lsblk` helps verify if your storage volume (EBS on AWS) is correctly mounted. If a volume isn't listed here, your application will crash.
 - **Troubleshooting:** If your server is "laggy," checking `free -h` helps identify if you have run out of RAM and are hitting the "Swap" file (which is much slower than RAM).
+
+## 6 Mar 2026: Network Port Monitoring (`ss`)
+
+I learned how to check network connections to ensure my cloud applications are actually "listening" for traffic on the correct ports.
+
+### 1. The Concept
+- **What:** `ss` stands for "Socket Statistics." It displays information about TCP and UDP network connections.
+- **Why:** Before you blame a firewall or cloud security group for an outage, you must first verify that your application is actually running and listening on the server's local port.
+
+### 2. The Flags (The "TULN" acronym)
+- `-t`: **T**CP connections.
+- `-u`: **U**DP connections.
+- `-l`: **L**istening ports (the most important part for DevSecOps).
+- `-n`: **N**umeric (show port numbers instead of service names like 'http').
+- `-p`: **P**rocess (shows which program owns the connection; requires `sudo`).
