@@ -22,11 +22,13 @@
 html {
     scroll-behavior: auto;
     /* Removed smooth scroll if it causes lag */
+    overflow-x: hidden;
 }
 
 body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-dark);
+    overflow-x: hidden;
     /* Sharp, high-contrast grid lines, NO linear gradients parsing every frame */
     background-image:
         linear-gradient(#151515 1px, transparent 1px),
@@ -522,6 +524,18 @@ footer {
     }
 
     .details-content {
-        padding: 30px 20px;
+        padding: 30px 15px;
+    }
+
+    /* Shrink the massive hero title so it doesn't overflow on phones */
+    .details-content h1 {
+        font-size: 1.8rem !important;
+        letter-spacing: 1px !important;
+        word-break: break-word;
+    }
+
+    /* Prevent any inner element from bursting wider than the screen */
+    .details-content * {
+        max-width: 100%;
     }
 }
