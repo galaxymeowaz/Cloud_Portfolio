@@ -766,3 +766,27 @@ I learned how to check network connections to ensure my cloud applications are a
 - `-l`: **L**istening ports (the most important part for DevSecOps).
 - `-n`: **N**umeric (show port numbers instead of service names like 'http').
 - `-p`: **P**rocess (shows which program owns the connection; requires `sudo`).
+
+## 7 Mar 2026: Mastering Standard Streams (0, 1, 2) & Output Redirection
+
+I learned how Linux segregates successful command outputs from failure messages, and how to control where that data goes. This is the foundation of automated logging in DevOps.
+
+### 1. The Concept (The Three Streams)
+Every Linux command communicates using three standard data streams:
+- **0 (stdin):** Standard Input (Data fed *into* a command).
+- **1 (stdout):** Standard Output (The successful text a command prints).
+- **2 (stderr):** Standard Error (The failure/error messages).
+
+### 2. The Operators
+- `>` : Redirects Stream 1 (stdout) into a file.
+- `2>` : Redirects Stream 2 (stderr) into a file.
+- `2>&1` : Merges Stream 2 into Stream 1 (Combines errors and success into the same output).
+
+### 3. Practical Execution & Verification
+I ran a test to prove I could capture both successful output and errors simultaneously:
+```bash
+# 1. Provide the command with one real file and one fake file.
+ls real_data.txt fake_data.txt > combined.log 2>&1
+
+# 2. Verify the capture by reading the file.
+cat combined.log
