@@ -805,3 +805,19 @@ I learned how to verify that a file has not been tampered with or corrupted by g
 
 ### 3. DevSecOps Use Case
 When downloading a tool like Terraform from the official HashiCorp website, they provide a `.sha256` file containing the official fingerprint. After I download the `.zip` file to my Linux server, I run `sha256sum` on it. If my output matches their website, I know the file is safe to install.
+
+## 9 Mar 2026: DNS Troubleshooting (`nslookup`) & Package Management
+
+I learned how to check Domain Name System (DNS) records directly from the terminal, and how to handle missing networking packages in the Linux server environment.
+
+### 1. The Concept
+- **What:** `nslookup` (Name Server Lookup) checks DNS servers to find the IP address associated with a domain name.
+- **Why:** When launching or migrating a website, DNS changes take time to propagate across the internet. `nslookup` allows me to verify exactly which server IP my domain is currently pointing to before I announce a launch.
+
+### 2. The Commands
+- **Standard Query:** `nslookup aztay.org` (Returns the IPv4 address).
+- **Specific Record Query:** `nslookup -type=mx aztay.org` (Returns the Mail Exchange servers handling email).
+
+### 3. Troubleshooting Missing Packages
+If a Linux environment returns `Command 'nslookup' not found`, the core networking tools are missing. 
+- **The Fix:** Run `sudo apt install bind9-dnsutils`. This package contains `nslookup` and other essential DNS utilities.
