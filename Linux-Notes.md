@@ -821,3 +821,19 @@ I learned how to check Domain Name System (DNS) records directly from the termin
 ### 3. Troubleshooting Missing Packages
 If a Linux environment returns `Command 'nslookup' not found`, the core networking tools are missing. 
 - **The Fix:** Run `sudo apt install bind9-dnsutils`. This package contains `nslookup` and other essential DNS utilities.
+
+## 10 Mar 2026: Directory Visualization (`tree`) & Package Installation
+
+I learned how to install missing utilities and instantly generate a visual map of my project folders.
+
+### 1. The Installation Breakdown
+Command: `sudo apt install tree -y`
+- **`sudo`**: Executes the command with root (Administrator) privileges.
+- **`apt`**: Advanced Package Tool (The Linux package manager).
+- **`install`**: The action telling `apt` to fetch and unpack the software.
+- **`tree`**: The specific package/utility name.
+- **`-y`**: The "Yes" flag. It automatically approves the installation prompt, which is essential for hands-free automation.
+
+### 2. The Concept (`tree`)
+- **What:** The `tree` command lists the contents of directories in a hierarchical, branching format.
+- **Why it matters:** It is highly useful for quickly confirming which files are at what location. This allows me to easily see where my files and folders are before I change directories or write deployment paths.
