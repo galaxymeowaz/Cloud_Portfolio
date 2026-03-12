@@ -837,3 +837,18 @@ Command: `sudo apt install tree -y`
 ### 2. The Concept (`tree`)
 - **What:** The `tree` command lists the contents of directories in a hierarchical, branching format.
 - **Why it matters:** It is highly useful for quickly confirming which files are at what location. This allows me to easily see where my files and folders are before I change directories or write deployment paths.
+
+## 12 Mar 2026: Pagination and Log Reading (`less`)
+
+I learned how to safely inspect massive server log files without consuming all of my system's RAM or freezing my terminal session. ('less' seems very helpful compared to 'cat' as it prevents the entire file from loading into memory which could cause the server to crash.)
+
+### 1. The Concept
+- **What:** `less` is a terminal pager. It displays text files one screen at a time.
+- **Why:** `cat` dumps the entire file to the screen instantly. `less` only loads the portion of the file you are currently looking at. This is critical for reading multi-gigabyte production logs without crashing the server.
+
+### 2. The Keyboard Shortcuts
+- `Spacebar`: Page down.
+- `b`: Page up (backwards).
+- `/word`: Search forward for a specific string.
+- `n`: Jump to the next search match.
+- `q`: Quit and return to the command prompt.
