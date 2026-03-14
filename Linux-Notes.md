@@ -852,3 +852,32 @@ I learned how to safely inspect massive server log files without consuming all o
 - `/word`: Search forward for a specific string.
 - `n`: Jump to the next search match.
 - `q`: Quit and return to the command prompt.
+
+## 13 Mar 2026: System Health & Load Average (`uptime`)
+
+I learned how to instantly check how long a server has been running and assess its CPU workload over time.
+
+### 1. The Concept
+- **What:** The `uptime` command outputs the current time, how long the system has been running, the number of logged-in users, and the system load averages.
+- **Why:** If an application went offline at 2:00 AM, checking the `uptime` tells me if the entire server crashed and rebooted, or if just the application failed while the server stayed online.
+
+### 2. Reading the "Load Average"
+The command prints three numbers at the very end (e.g., `load average: 0.15, 0.05, 0.01`). These represent the CPU queue over the last **1 minute**, **5 minutes**, and **15 minutes**.
+- **The Rule of 1.0:** If you have a 1-core CPU, a load of `1.0` means the CPU is at exactly 100% capacity. 
+- **Overload:** A load of `2.0` on a 1-core CPU means the system is receiving twice as much work as it can handle, and processes are waiting in a queue (causing severe lag).
+
+## 14 Mar 2026: Networking Identity (`hostname` & `ifconfig.me`)
+
+I learned how to identify the internal and external addresses of my Linux environment, which is critical for configuring cloud firewalls and API allow-lists.
+
+### 1. The Concept
+- **Internal vs. External:** My server has a private identity (Hostname/Internal IP) for local communication and a public identity (Public IP) for the internet.
+- **Why it matters:** When setting up the Gemini API, I may need to "whitelist" my server's Public IP so Google knows the traffic is coming from a trusted source.
+
+### 2. The Commands
+- `hostname`: Shows the local name of the machine.
+- `hostname -I`: Shows the internal private IP address.
+- `curl ifconfig.me`: Reaches out to an external service to reveal the server's Public IP.
+
+### 3. Practical Use Case
+If I am building a secure bot for the Gemini Hackathon, I can use `curl ifconfig.me` to find my server's address and then configure my Google Cloud Security settings to ONLY allow traffic from that specific IP address. This is a core "Zero Trust" practice.
