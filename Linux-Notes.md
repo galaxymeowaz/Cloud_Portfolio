@@ -881,3 +881,17 @@ I learned how to identify the internal and external addresses of my Linux enviro
 
 ### 3. Practical Use Case
 If I am building a secure bot for the Gemini Hackathon, I can use `curl ifconfig.me` to find my server's address and then configure my Google Cloud Security settings to ONLY allow traffic from that specific IP address. This is a core "Zero Trust" practice.
+
+## 15 Mar 2026: Centralized Log Management (`journalctl`)
+
+I learned how to query the systemd journal to monitor system-wide events and troubleshoot service failures in real-time.
+
+### 1. The Concept
+- **What:** `journalctl` is a utility for retrieving and viewing logs collected by systemd.
+- **Why:** In modern Linux, logs aren't always just plain text files in `/var/log`. `journalctl` provides a unified way to see logs from the kernel, background services (daemons), and applications in a single, searchable stream.
+
+### 2. The Commands
+- `journalctl -f`: **F**ollows logs live as they happen.
+- `journalctl -n 50`: Shows the **N**umber of most recent lines (50).
+- `journalctl -u nginx`: Filters logs for a specific **U**nit (service), such as Nginx or Docker.
+- `journalctl --since "1 hour ago"`: Filters by time, allowing for rapid pinpointing of when a specific error started.
