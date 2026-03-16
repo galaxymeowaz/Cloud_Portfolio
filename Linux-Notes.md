@@ -895,3 +895,17 @@ I learned how to query the systemd journal to monitor system-wide events and tro
 - `journalctl -n 50`: Shows the **N**umber of most recent lines (50).
 - `journalctl -u nginx`: Filters logs for a specific **U**nit (service), such as Nginx or Docker.
 - `journalctl --since "1 hour ago"`: Filters by time, allowing for rapid pinpointing of when a specific error started.
+
+## 16 Mar 2026: System Clock & Calendar (`date` & `cal`)
+
+I learned how to verify system time and view calendars without leaving the command line. This is essential for ensuring my server stays synchronized with external APIs like Google Gemini.
+
+### 1. The Concept
+- **What:** `date` prints the current system time; `cal` prints a formatted calendar.
+- **Why:** Cloud services often fail if the server's time deviates by more than a few minutes from the API's time. Checking `date` is a standard first step in troubleshooting "Unauthorized" or "Invalid Token" errors.
+
+### 2. The Commands
+- `date`: Shows the full date, time, and timezone.
+- `date +%s`: Shows the "Unix Epoch Time" (seconds since 1970). This is how computers talk to each other about time.
+- `cal`: Displays a simple calendar of the current month.
+- `cal -y`: Displays the calendar for the entire year.
