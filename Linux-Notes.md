@@ -909,3 +909,15 @@ I learned how to verify system time and view calendars without leaving the comma
 - `date +%s`: Shows the "Unix Epoch Time" (seconds since 1970). This is how computers talk to each other about time.
 - `cal`: Displays a simple calendar of the current month.
 - `cal -y`: Displays the calendar for the entire year.
+
+## 17 Mar 2026: Fast Command Correction (`^old^new`)
+
+I learned the "Quick Substitution" shortcut to fix typos or swap parameters in my previous command without using the arrow keys or retyping.
+
+### 1. The Concept
+- **What:** The `^` operator is a bash shortcut that performs a search-and-replace on the *most recent* command and executes it again.
+- **Why:** During the Gemini Hackathon, I will be running complex deployment commands. If I misspell a folder name or want to quickly switch between `main.py` and `test.py`, this shortcut saves valuable seconds and reduces frustration.
+
+### 2. The Command
+- **Syntax:** `^original_text^replacement_text`
+- **Result:** Linux takes the last command, replaces the first occurrence of `original_text` with `replacement_text`, and hits Enter for you.
