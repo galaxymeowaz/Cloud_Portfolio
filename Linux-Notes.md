@@ -930,3 +930,16 @@ I learned how to pull a complete technical summary of my server's identity and p
 - **What:** `uname` provides the "name" of the system.
 
 - **Why:** When installing specific DevOps tools (like Docker or Terraform), you must know your CPU architecture (e.g., `x86_64` vs `aarch64`). Using these commands ensures I download the correct version of software for my specific environment.
+
+## 19 Mar 2026: Real-Time Network Diagnostics (`mtr`)
+
+I learned how to use `mtr` to combine the functions of `ping` and `traceroute` into a live-updating diagnostic dashboard.
+
+### 1. The Concept
+- **What:** `mtr` (My TraceRoute) constantly probes the path to a destination, updating statistics for every "hop" (router) in between.
+- **Why:** While `ping` only tells me if the final destination is up, `mtr` shows me exactly which router in the middle is dropping packets or causing lag. This is essential for troubleshooting AWS connectivity or Gemini API latency.
+
+### 2. The Columns to Watch
+- **Loss%:** If a middle hop shows 50% loss but the final hop shows 0%, the middle router is likely just "limiting" ICMP traffic. If the final hop shows loss, you have a real connection problem.
+- **Snt:** The number of packets sent. Let it run until `Snt` is at least 50 for an accurate report.
+- **Last/Avg/Best/Wrst:** The speed of your connection in milliseconds (ms).
