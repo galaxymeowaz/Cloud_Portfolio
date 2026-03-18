@@ -921,3 +921,12 @@ I learned the "Quick Substitution" shortcut to fix typos or swap parameters in m
 ### 2. The Command
 - **Syntax:** `^original_text^replacement_text`
 - **Result:** Linux takes the last command, replaces the first occurrence of `original_text` with `replacement_text`, and hits Enter for you.
+
+## 18 Mar 2026: System Identity & CPU Architecture (`uname` & `lscpu`)
+
+I learned how to pull a complete technical summary of my server's identity and processing power.
+
+### 1. The Concept
+- **What:** `uname` provides the "name" of the system.
+
+- **Why:** When installing specific DevOps tools (like Docker or Terraform), you must know your CPU architecture (e.g., `x86_64` vs `aarch64`). Using these commands ensures I download the correct version of software for my specific environment.
