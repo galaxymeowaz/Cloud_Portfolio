@@ -943,3 +943,16 @@ I learned how to use `mtr` to combine the functions of `ping` and `traceroute` i
 - **Loss%:** If a middle hop shows 50% loss but the final hop shows 0%, the middle router is likely just "limiting" ICMP traffic. If the final hop shows loss, you have a real connection problem.
 - **Snt:** The number of packets sent. Let it run until `Snt` is at least 50 for an accurate report.
 - **Last/Avg/Best/Wrst:** The speed of your connection in milliseconds (ms).
+
+## 20 Mar 2026: The "Last Argument" Keyboard Shortcut (`Alt + .`)
+
+I learned the fastest way to reuse the last piece of information from my previous command without re-typing or copy-pasting.
+
+### 1. The Concept
+- **What:** `Alt + .` is a Bash shell shortcut that inserts the last "argument" (the final word) of the previous command into your current prompt.
+- **Why:** In Cloud Architecture, file paths are often very long (e.g., `/var/www/html/assets/img/logo.png`). Typing them once is enough; `Alt + .` allows me to chain commands together instantly.
+
+### 2. Practical Examples
+- **Step A:** `nano secret_config.txt` (You edit the file).
+- **Step B:** `git add [Alt + .]` (Automatically becomes `git add secret_config.txt`).
+- **Step C:** `git commit -m "update [Alt + .]"` (Automatically becomes `git commit -m "update secret_config.txt"`).
