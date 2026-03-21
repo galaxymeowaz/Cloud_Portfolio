@@ -956,3 +956,17 @@ I learned the fastest way to reuse the last piece of information from my previou
 - **Step A:** `nano secret_config.txt` (You edit the file).
 - **Step B:** `git add [Alt + .]` (Automatically becomes `git add secret_config.txt`).
 - **Step C:** `git commit -m "update [Alt + .]"` (Automatically becomes `git commit -m "update secret_config.txt"`).
+
+## 22 Mar 2026: Job Control & Background Processes (`&`, `jobs`, `fg`)
+
+I learned how to manage multiple running processes within a single terminal session without needing to open multiple windows.
+
+### 1. The Concept
+- **What:** The `&` operator tells Linux to execute a command but immediately return control of the terminal to the user while the command finishes in the background.
+- **Why:** When testing a live web server or running a massive file download (`curl`), I do not want my terminal frozen. Pushing the task to the background allows me to continue writing code or checking logs in the same session.
+
+### 2. The Commands
+- **`[command] &`**: Appending the ampersand starts the task in the background.
+- **`jobs`**: Lists all tasks currently running in the background of this specific terminal session.
+- **`fg [Job_ID]`**: Brings a background job back to the **F**ore**g**round.
+- **`Ctrl + Z`**: If I forget to use `&` and trap my terminal, `Ctrl + Z` suspends (pauses) the active program, allowing me to type `bg` to force it into the background.
