@@ -970,3 +970,16 @@ I learned how to manage multiple running processes within a single terminal sess
 - **`jobs`**: Lists all tasks currently running in the background of this specific terminal session.
 - **`fg [Job_ID]`**: Brings a background job back to the **F**ore**g**round.
 - **`Ctrl + Z`**: If I forget to use `&` and trap my terminal, `Ctrl + Z` suspends (pauses) the active program, allowing me to type `bg` to force it into the background.
+
+## 23 Mar 2026: Persistent Background Processes (`nohup`)
+
+I learned how to run server applications that survive terminal disconnections. This is critical for keeping my Hackathon API backend alive after I log out of the server.
+
+### 1. The Concept
+- **What:** `nohup` stands for "No Hang Up." It intercepts the `SIGHUP` signal that Linux sends when a user disconnects, preventing the target application from being killed.
+- **Why:** `&` puts a task in the background, but it is still tied to the active session. `nohup ... &` completely detaches the task, allowing it to run indefinitely on the server.
+
+### 2. The Commands
+- **Start Detached Task:** `nohup python3 main.py &`
+- **View Output:** Because the task can no longer print to the terminal, all `stdout` and `stderr` streams are automatically routed to a file named `nohup.out` in the directory where the command was run.
+- **Custom Log File:** `nohup python3 main.py > server.log 2>&1 &` (Routes the output to a specific file instead of the default `nohup.out`).
