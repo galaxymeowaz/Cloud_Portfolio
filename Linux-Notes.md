@@ -983,3 +983,16 @@ I learned how to run server applications that survive terminal disconnections. T
 - **Start Detached Task:** `nohup python3 main.py &`
 - **View Output:** Because the task can no longer print to the terminal, all `stdout` and `stderr` streams are automatically routed to a file named `nohup.out` in the directory where the command was run.
 - **Custom Log File:** `nohup python3 main.py > server.log 2>&1 &` (Routes the output to a specific file instead of the default `nohup.out`).
+
+## 24 Mar 2026: Stealth Execution & History Hygiene (`HISTCONTROL`)
+
+I learned how to execute sensitive Linux terminal commands without leaving a trace in the system's bash history logs.
+
+### 1. The Concept
+- **What:** By placing a single `Space` character at the very beginning of a command line, Linux will execute the command but refuse to save it to the history file.
+- **Why:** When testing DevSecOps pipelines, I often need to temporarily export a real API key or database password into the environment. If I do not use the space trick, that credential is saved in plain text in my `~/.bash_history` file, creating a massive security vulnerability.
+
+### 2. The Requirement
+- This trick relies on a hidden environment variable called `HISTCONTROL`. 
+- In Ubuntu/WSL, it is set to `ignoreboth` by default (which means it ignores commands starting with a space, and ignores consecutive duplicate commands).
+- **Verification:** `echo $HISTCONTROL`
