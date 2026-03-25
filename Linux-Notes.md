@@ -996,3 +996,18 @@ I learned how to execute sensitive Linux terminal commands without leaving a tra
 - This trick relies on a hidden environment variable called `HISTCONTROL`. 
 - In Ubuntu/WSL, it is set to `ignoreboth` by default (which means it ignores commands starting with a space, and ignores consecutive duplicate commands).
 - **Verification:** `echo $HISTCONTROL`
+
+## 25 Mar 2026: Terminal Cursor Navigation (`Ctrl` Shortcuts)
+
+I learned how to navigate and edit long command-line strings instantly without using the arrow keys or mouse.
+
+### 1. The Concept
+- **What:** Standard Bash environments use Emacs-style keybindings for line editing. 
+- **Why:** In DevSecOps, commands (like AWS CLI queries or Terraform initializations) are often incredibly long. Keyboard shortcuts allow for rapid corrections, saving significant time during high-pressure deployments.
+
+### 2. The Core Shortcuts
+- `Ctrl + A`: Jump cursor to the **A**bsolute beginning of the line.
+- `Ctrl + E`: Jump cursor to the **E**nd of the line.
+- `Ctrl + W`: Delete one **W**ord backward from the cursor.
+- `Ctrl + U`: Cut/Clear everything from the cursor to the beginning of the line.
+- `Ctrl + L`: Clears the entire terminal screen (faster than typing `clear`).
