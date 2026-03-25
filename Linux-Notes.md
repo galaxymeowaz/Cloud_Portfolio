@@ -1011,3 +1011,15 @@ I learned how to navigate and edit long command-line strings instantly without u
 - `Ctrl + W`: Delete one **W**ord backward from the cursor.
 - `Ctrl + U`: Cut/Clear everything from the cursor to the beginning of the line.
 - `Ctrl + L`: Clears the entire terminal screen (faster than typing `clear`).
+
+## 26 Mar 2026: Directory Stack Navigation (`pushd` & `popd`)
+
+I learned how to navigate between complex directory structures instantly without retyping file paths.
+
+### 1. The Concept
+- **`pushd` (Push Directory):** Changes your directory and "bookmarks" your previous location by pushing it onto a hidden stack.
+- **`popd` (Pop Directory):** Pulls the most recent bookmark off the stack and instantly teleports you back to that directory.
+- **`dirs`:** Shows the current list of saved directories in your stack.
+
+### 2. The DevSecOps Use Case
+When an application crashes, I need to check the logs in `/var/log/` and then edit the configuration file in `/etc/`. `pushd` allows me to jump to the config file, fix the error, and immediately `popd` back to the logs to see if the error is resolved, saving critical time during an outage.
