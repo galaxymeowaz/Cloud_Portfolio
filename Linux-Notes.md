@@ -1023,3 +1023,17 @@ I learned how to navigate between complex directory structures instantly without
 
 ### 2. The DevSecOps Use Case
 When an application crashes, I need to check the logs in `/var/log/` and then edit the configuration file in `/etc/`. `pushd` allows me to jump to the config file, fix the error, and immediately `popd` back to the logs to see if the error is resolved, saving critical time during an outage.
+
+## 27 Mar 2026: Command Resolution (`type`)
+
+I learned how to debug how the Bash shell interprets commands, differentiating between aliases, built-ins, and physical binaries.
+
+### 1. The Concept
+- **What:** The `type` command tells you exactly what will happen when you type a specific word into the terminal and hit Enter.
+- **Why:** If I type `docker` and get an unexpected error, `which docker` might tell me the file is correct, but `type docker` will reveal if another developer secretly aliased `docker` to a different, broken script. 
+
+### 2. The Command
+- **`type [command]`**: Analyzes the word and returns its nature:
+  1. **Alias:** A custom shortcut.
+  2. **Shell Builtin:** A command native to Bash (like `cd`, `echo`, or `export`).
+  3. **File:** An executable binary located in the system's `$PATH`.
