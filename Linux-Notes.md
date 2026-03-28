@@ -1037,3 +1037,14 @@ I learned how to debug how the Bash shell interprets commands, differentiating b
   1. **Alias:** A custom shortcut.
   2. **Shell Builtin:** A command native to Bash (like `cd`, `echo`, or `export`).
   3. **File:** An executable binary located in the system's `$PATH`.
+
+  ## 28 Mar 2026: Identity Verification (`whoami` & `id`)
+
+I learned how to instantly verify my active user privileges and group memberships before executing system commands.
+
+### 1. The Concept
+- **`whoami`:** Returns the exact username currently logged into the terminal session.
+- **`id`:** Returns the username, User ID (UID), primary Group ID (GID), and all other secondary groups the user belongs to.
+
+### 2. The DevSecOps Use Case
+In AWS EC2 or Docker containers, applications often run under restricted service accounts. If a script is failing with a "Permission Denied" error, typing `id` confirms whether the current session actually has the correct group permissions (e.g., the `docker` group) required to execute the file.
