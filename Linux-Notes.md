@@ -1048,3 +1048,15 @@ I learned how to instantly verify my active user privileges and group membership
 
 ### 2. The DevSecOps Use Case
 In AWS EC2 or Docker containers, applications often run under restricted service accounts. If a script is failing with a "Permission Denied" error, typing `id` confirms whether the current session actually has the correct group permissions (e.g., the `docker` group) required to execute the file.
+
+## 29 Mar 2026: Parsing JSON Data (`jq`)
+
+I learned how to format and read complex JSON API responses directly in the terminal without exporting the data to a graphical text editor.
+
+### 1. The Concept
+- **What:** `jq` is a lightweight, command-line JSON processor. It acts like `sed` or `awk`, but is specifically designed for JSON data structures.
+- **Why:** Cloud CLIs (like AWS CLI or Google Cloud CLI) and AI APIs output data in JSON format. When an API request fails, finding the specific `"error_message"` inside a 500-line unformatted JSON block is nearly impossible without `jq`.
+
+### 2. The Commands
+- **Pretty Print:** `cat file.json | jq` (Formats and color-codes the data).
+- **Extract Specific Key:** `cat file.json | jq '.data.model'` (Outputs only the value associated with the 'model' key).
