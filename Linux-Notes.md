@@ -1060,3 +1060,15 @@ I learned how to format and read complex JSON API responses directly in the term
 ### 2. The Commands
 - **Pretty Print:** `cat file.json | jq` (Formats and color-codes the data).
 - **Extract Specific Key:** `cat file.json | jq '.data.model'` (Outputs only the value associated with the 'model' key).
+
+## 30 Mar 2026: Reclaiming Trapped Network Ports (`lsof`)
+
+I learned how to identify and terminate background processes that are locking critical network ports, preventing "Address already in use" errors during deployment.
+
+### 1. The Concept
+- **What:** `lsof` stands for "List Open Files." In Linux, everything is a file, including active network connections and sockets.
+- **Why:** When a Python or Node.js web server crashes, it often fails to release its assigned port. You cannot launch the application again until you find the hidden process holding the port and kill it.
+
+### 2. The Commands
+- **Find the Culprit:** `lsof -i :[PORT_NUMBER]` (e.g., `lsof -i :8080`).
+- **The Execution:** The output provides the specific `PID` (Process ID). Execute `kill -9 [PID]` to forcefully terminate the process and free the port.
