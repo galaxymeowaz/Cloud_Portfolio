@@ -1072,3 +1072,17 @@ I learned how to identify and terminate background processes that are locking cr
 ### 2. The Commands
 - **Find the Culprit:** `lsof -i :[PORT_NUMBER]` (e.g., `lsof -i :8080`).
 - **The Execution:** The output provides the specific `PID` (Process ID). Execute `kill -9 [PID]` to forcefully terminate the process and free the port.
+
+## 31 Mar 2026: High-Speed Configuration Editing (`nano` Shortcuts)
+
+I learned advanced navigation and deletion shortcuts for the `nano` editor to accelerate my DevSecOps workflow when editing Docker configuration files.
+
+### 1. The Concept
+- **Efficiency:** Editing text in a terminal can be slow. Shortcuts like `Alt + T` (Cut to End) and `Alt + Backspace` (Delete Word) allow for rapid refactoring of code without using a mouse or the arrow keys.
+- **Why it matters for Docker:** `Dockerfile` instructions often have long paths. Being able to delete a whole word or a whole block of code instantly reduces human error during manual configuration.
+
+### 2. The Essential Shortcuts
+- `Alt + T`: **T**runcate/Cut everything from the cursor to the end of the file.
+- `Alt + Backspace`: Delete the entire word to the left of the cursor.
+- `Ctrl + K`: Cut the entire current line.
+- `Ctrl + U`: **U**ncut (Paste) the last thing you deleted with `Alt + T` or `Ctrl + K`.
