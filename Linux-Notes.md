@@ -1086,3 +1086,14 @@ I learned advanced navigation and deletion shortcuts for the `nano` editor to ac
 - `Alt + Backspace`: Delete the entire word to the left of the cursor.
 - `Ctrl + K`: Cut the entire current line.
 - `Ctrl + U`: **U**ncut (Paste) the last thing you deleted with `Alt + T` or `Ctrl + K`.
+
+## 2 Apr 2026: Terminal Flow Control (`Ctrl + S` & `Ctrl + Q`)
+
+I learned how to pause and resume the visual output of the terminal to inspect high-velocity logs during a live deployment.
+
+### 1. The Concept
+- **What:** `Ctrl + S` (XOFF) stops the terminal from sending output to the display. `Ctrl + Q` (XON) resumes it.
+- **Why:** When a Docker container or a Gemini API script is dumping thousands of lines of logs (Standard Output), I often need to "pause time" to read a specific error code without killing the process with `Ctrl + C`. 
+
+### 2. The Use Case
+During the Hackathon, if my agent is in a "loop" and spitting out text, I can hit `Ctrl + S` to freeze the frame, copy the error message, and then hit `Ctrl + Q` to let the program continue running in the background.
