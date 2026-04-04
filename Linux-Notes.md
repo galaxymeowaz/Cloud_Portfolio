@@ -1097,3 +1097,15 @@ I learned how to pause and resume the visual output of the terminal to inspect h
 
 ### 2. The Use Case
 During the Hackathon, if my agent is in a "loop" and spitting out text, I can hit `Ctrl + S` to freeze the frame, copy the error message, and then hit `Ctrl + Q` to let the program continue running in the background.
+
+## 4 Apr 2026: Rapid File Generation (`Heredoc / EOF`)
+
+I learned how to use the `cat <<EOF` syntax to create multi-line configuration files (like Dockerfiles or YAML manifests) directly from the command line.
+
+### 1. The Concept
+- **What:** A "Heredoc" (Here Document) is a redirection operator that tells the shell to read input until it sees a specific delimiter (usually `EOF` for "End Of File").
+- **Why:** In DevSecOps automation, I cannot manually open a text editor on a remote server. Heredocs allow me to write scripts that generate their own configuration files automatically during a deployment.
+
+### 2. The Command Structure
+- `cat <<EOF > filename`: The `>` overwrites the file with everything you type until you type `EOF` on a new line.
+- `cat <<EOF >> filename`: The `>>` appends the text block to the bottom of an existing file.
