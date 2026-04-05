@@ -1109,3 +1109,17 @@ I learned how to use the `cat <<EOF` syntax to create multi-line configuration f
 ### 2. The Command Structure
 - `cat <<EOF > filename`: The `>` overwrites the file with everything you type until you type `EOF` on a new line.
 - `cat <<EOF >> filename`: The `>>` appends the text block to the bottom of an existing file.
+
+## 7 Apr 2026: Column Extraction (`awk`)
+
+I learned how to isolate and extract specific vertical columns of text from terminal outputs and log files.
+
+### 1. The Concept
+- **What:** `awk` is a powerful text-processing language, but its most common DevSecOps use case is column extraction. By default, it treats any space or tab as a "column divider."
+- **Why:** If I run `ps aux | grep python` to find a frozen server, it returns a long string of data. I only need the PID (Process ID) which is located in the 2nd column. `awk` grabs that specific number so I can pipe it directly into a `kill` command.
+
+### 2. The Command Structure
+- `awk '{print $1}'`: Prints the 1st column.
+- `awk '{print $2}'`: Prints the 2nd column.
+- `awk '{print $0}'`: Prints the entire line (equivalent to standard output).
+- `awk '{print $NF}'`: Prints the **N**umber of **F**ields (the very last column, no matter how many columns there are).
