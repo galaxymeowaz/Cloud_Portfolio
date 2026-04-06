@@ -1110,7 +1110,7 @@ I learned how to use the `cat <<EOF` syntax to create multi-line configuration f
 - `cat <<EOF > filename`: The `>` overwrites the file with everything you type until you type `EOF` on a new line.
 - `cat <<EOF >> filename`: The `>>` appends the text block to the bottom of an existing file.
 
-## 7 Apr 2026: Column Extraction (`awk`)
+## 6 Apr 2026: Column Extraction (`awk`)
 
 I learned how to isolate and extract specific vertical columns of text from terminal outputs and log files.
 
@@ -1135,3 +1135,15 @@ I learned how to benchmark command and script execution speed to optimize cloud 
 ### 2. Reading the Output
 - **Real:** The total time passed in the real world (Latency + Processing). This is the metric that affects the end-user waiting for a response.
 - **User/Sys:** The actual time the CPU spent working. If `real` is high but `user/sys` are near zero, it means the script isn't doing heavy math; it is just waiting on the network.
+
+## 7 Apr 2026: The "Double Bang" Shortcut (`sudo !!`)
+
+I learned the fastest way to re-execute the previous command with Administrative (root) privileges without retyping the entire string.
+
+### 1. The Concept
+- **What:** In Bash, `!!` is a designator that refers to the entire previous command line.
+- **Why:** In DevSecOps, we follow the "Principle of Least Privilege," meaning we don't stay logged in as `root`. We often forget to prefix a command with `sudo`. This shortcut saves 5–10 seconds of retyping every time a permission error occurs.
+
+### 2. The Logic
+When you type `sudo !!`, the shell replaces the exclamation points with your last command before executing. 
+- *Example:* If you typed `touch /root/secret.txt`, running `sudo !!` actually executes `sudo touch /root/secret.txt`.
