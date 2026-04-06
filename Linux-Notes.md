@@ -1123,3 +1123,15 @@ I learned how to isolate and extract specific vertical columns of text from term
 - `awk '{print $2}'`: Prints the 2nd column.
 - `awk '{print $0}'`: Prints the entire line (equivalent to standard output).
 - `awk '{print $NF}'`: Prints the **N**umber of **F**ields (the very last column, no matter how many columns there are).
+
+## 6 Apr 2026: Execution Profiling (`time`)
+
+I learned how to benchmark command and script execution speed to optimize cloud resource consumption.
+
+### 1. The Concept
+- **What:** Placing the word `time` before any Linux command tracks exactly how many seconds and milliseconds the CPU spent executing it.
+- **Why:** In Serverless Cloud environments (like AWS Lambda or Google Cloud Functions), I am billed by the millisecond. If my Python script takes 2.5 seconds to process a Gemini API response instead of 0.5 seconds, my cloud infrastructure costs will multiply by 5x.
+
+### 2. Reading the Output
+- **Real:** The total time passed in the real world (Latency + Processing). This is the metric that affects the end-user waiting for a response.
+- **User/Sys:** The actual time the CPU spent working. If `real` is high but `user/sys` are near zero, it means the script isn't doing heavy math; it is just waiting on the network.
