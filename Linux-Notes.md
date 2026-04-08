@@ -1147,3 +1147,16 @@ I learned the fastest way to re-execute the previous command with Administrative
 ### 2. The Logic
 When you type `sudo !!`, the shell replaces the exclamation points with your last command before executing. 
 - *Example:* If you typed `touch /root/secret.txt`, running `sudo !!` actually executes `sudo touch /root/secret.txt`.
+
+## 8 Apr 2026: File Immutability (`chattr`)
+
+I learned how to apply advanced file attributes to protect critical configuration files from accidental deletion or malicious modification.
+
+### 1. The Concept
+- **What:** The `chattr` (Change Attribute) command modifies file properties at the Linux file-system level, which is a layer deeper than standard read/write (`chmod`) permissions.
+- **Why:** If a hacker gains `root` access, or a junior developer runs `sudo rm -rf /`, standard permissions will not stop them. The `+i` (Immutable) flag completely freezes the file state.
+
+### 2. The Commands
+- **Lock a File:** `sudo chattr +i [filename]`
+- **Unlock a File:** `sudo chattr -i [filename]`
+- **View Attributes:** `lsattr [filename]` (Standard `ls -l` will NOT show the immutable flag; you must use `lsattr` to see if the 'i' is present).
