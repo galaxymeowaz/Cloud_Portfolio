@@ -1,3 +1,5 @@
+
+
 # Linux Command Log 
 **Author:** [Joseph Tay]
 **Status:** Learning in Progress
@@ -1174,3 +1176,23 @@ I learned how to use Netcat to instantly verify if a remote server's port is ope
 - **The Flags:**
   - `-z`: Zero-I/O mode. It tells Netcat to just scan for a listening daemon without actually sending any data.
   - `-v`: Verbose. Forces Netcat to print "succeeded" or "failed" to the screen so I can read the result.
+
+  ## 9 Apr 2026: Task Automation (`crontab`)
+
+I learned how to schedule background scripts to run automatically at specific intervals using the Linux Cron daemon.
+
+### 1. The Concept
+- **What:** `cron` is a background service that reads the `crontab` (cron table) and executes the listed commands at the specified times.
+- **Why:** Essential for DevSecOps automation, such as triggering daily database backups, rotating logs, or pulling API data every 5 minutes without human intervention.
+
+### 2. The Time Syntax (5 Asterisks)
+The schedule is defined by 5 fields: `Minute Hour Day Month DayOfWeek`
+- `* * * * *`: Run every minute.
+- `0 * * * *`: Run at the top of every hour (Minute 0).
+- `0 2 * * *`: Run every day at 2:00 AM.
+- `*/5 * * * *`: Run every 5 minutes (using the step operator `/`).
+
+### 3. The Commands
+- `crontab -e`: **E**dit the schedule.
+- `crontab -l`: **L**ist scheduled tasks.
+- `crontab -r`: **R**emove (Delete) the entire table.
