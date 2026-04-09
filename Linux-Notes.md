@@ -1160,3 +1160,17 @@ I learned how to apply advanced file attributes to protect critical configuratio
 - **Lock a File:** `sudo chattr +i [filename]`
 - **Unlock a File:** `sudo chattr -i [filename]`
 - **View Attributes:** `lsattr [filename]` (Standard `ls -l` will NOT show the immutable flag; you must use `lsattr` to see if the 'i' is present).
+
+## 9 Apr 2026: Remote Port Scanning (`nc`)
+
+I learned how to use Netcat to instantly verify if a remote server's port is open and accepting traffic, which is critical for debugging cloud firewalls.
+
+### 1. The Concept
+- **What:** `nc` (Netcat) is a networking utility for reading and writing data across network connections. 
+- **Why:** `ping` only tells me if a server is turned on. It does not tell me if the specific application port (like Port 5432 for PostgreSQL or Port 8080 for my API) is open. `nc` tests the exact port directly.
+
+### 2. The Command
+- **Syntax:** `nc -zv [IP_or_Domain] [Port]`
+- **The Flags:**
+  - `-z`: Zero-I/O mode. It tells Netcat to just scan for a listening daemon without actually sending any data.
+  - `-v`: Verbose. Forces Netcat to print "succeeded" or "failed" to the screen so I can read the result.
