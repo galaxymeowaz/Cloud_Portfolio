@@ -1196,3 +1196,16 @@ The schedule is defined by 5 fields: `Minute Hour Day Month DayOfWeek`
 - `crontab -e`: **E**dit the schedule.
 - `crontab -l`: **L**ist scheduled tasks.
 - `crontab -r`: **R**emove (Delete) the entire table.
+
+## 11 Apr 2026: Pipeline Argument Execution (`xargs`)
+
+I learned how to bridge the gap between text-filtering tools and execution commands using `xargs`.
+
+### 1. The Concept
+- **What:** `xargs` reads items from standard input (separated by spaces or newlines) and executes a specified command once for every item.
+- **Why:** Many core Linux commands (like `rm`, `kill`, or `cp`) do not accept data directly through the pipe (`|`). `xargs` catches the piped text and formats it correctly for the receiving command.
+
+### 2. The DevSecOps Use Case
+If a rogue script spawns 50 broken Python processes, I do not type `kill` 50 times. I combine `grep`, `awk`, and `xargs` to terminate them all instantly:
+```bash
+ps aux | grep "python" | awk '{print $2}' | xargs kill -9
