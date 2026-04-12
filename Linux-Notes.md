@@ -1209,3 +1209,15 @@ I learned how to bridge the gap between text-filtering tools and execution comma
 If a rogue script spawns 50 broken Python processes, I do not type `kill` 50 times. I combine `grep`, `awk`, and `xargs` to terminate them all instantly:
 ```bash
 ps aux | grep "python" | awk '{print $2}' | xargs kill -9
+
+## 12 Apr 2026: Safe Data Transport (`base64`)
+
+I learned how to encode and decode text strings to ensure special characters do not break cloud configuration files.
+
+### 1. The Concept
+- **What:** `base64` translates any text or binary data into a restricted alphabet of 64 standard characters (A-Z, a-z, 0-9, +, /).
+- **Why:** In DevOps, tools like Kubernetes strictly require secrets (like passwords or API keys) to be injected as Base64 encoded strings in their YAML manifests. This ensures parsing engines do not crash when they encounter strange symbols.
+
+### 2. The Commands
+- **Encode:** `echo -n "secret_text" | base64`
+- **Decode:** `echo "encoded_text" | base64 --decode`
