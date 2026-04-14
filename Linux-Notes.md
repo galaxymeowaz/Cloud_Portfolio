@@ -1221,3 +1221,14 @@ I learned how to encode and decode text strings to ensure special characters do 
 ### 2. The Commands
 - **Encode:** `echo -n "secret_text" | base64`
 - **Decode:** `echo "encoded_text" | base64 --decode`
+
+## 14 Apr 2026: AWS Identity Verification (`sts get-caller-identity`)
+
+I learned the AWS CLI equivalent of the Linux `whoami` command to instantly verify my active IAM context before executing cloud infrastructure changes.
+
+### 1. The Concept
+- **What:** STS stands for Security Token Service. The `get-caller-identity` command returns details about the IAM user or role whose credentials are used to call the API.
+- **Why:** In DevSecOps, I manage multiple AWS environments (e.g., Personal Sandbox, Hackathon Project, Client Production). Running a command like `aws s3 rm --recursive s3://my-bucket` while accidentally authenticated to a production profile will result in severe data loss. 
+
+### 2. The Verification Workflow
+Before executing `terraform apply` or any destructive AWS CLI command, it is mandatory hygiene to run `aws sts get-caller-identity` to confirm the `Account` ID and `Arn` match the intended target environment.
