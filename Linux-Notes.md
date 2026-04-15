@@ -1232,3 +1232,17 @@ I learned the AWS CLI equivalent of the Linux `whoami` command to instantly veri
 
 ### 2. The Verification Workflow
 Before executing `terraform apply` or any destructive AWS CLI command, it is mandatory hygiene to run `aws sts get-caller-identity` to confirm the `Account` ID and `Arn` match the intended target environment.
+
+## 15 Apr 2026: Command-Line Network Management (`nmcli`)
+
+I learned how to scan for and connect to Wi-Fi networks using the terminal, a critical skill for managing headless servers and remote Linux environments.
+
+### 1. The Concept
+- **What:** `nmcli` is the command-line interface for NetworkManager, the standard Linux service that handles network connections.
+- **Why:** In a DevSecOps role, you will often manage servers (like a Raspberry Pi or an AWS Snowcone) that have no monitor or mouse. Being able to reconfigure network interfaces via SSH or serial console is a mandatory survival skill.
+
+### 2. The Essential Commands
+- `nmcli dev wifi list`: Scans the airwaves for available SSIDs, showing signal strength and security types.
+- `nmcli dev wifi connect "SSID" password "PWD"`: Establishes a connection and saves the profile permanently.
+- `nmcli connection show`: Lists all saved network profiles on the machine.
+- `nmcli connection up/down [Name]`: Manually toggles a specific connection on or off.
