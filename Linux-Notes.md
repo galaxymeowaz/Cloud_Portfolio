@@ -1246,3 +1246,18 @@ I learned how to scan for and connect to Wi-Fi networks using the terminal, a cr
 - `nmcli dev wifi connect "SSID" password "PWD"`: Establishes a connection and saves the profile permanently.
 - `nmcli connection show`: Lists all saved network profiles on the machine.
 - `nmcli connection up/down [Name]`: Manually toggles a specific connection on or off.
+
+## 18 Apr 2026: Nested Directory Creation (`mkdir -p`)
+
+I learned how to instantly generate complex, multi-level folder structures using a single command.
+
+### 1. The Concept
+- **What:** The `mkdir -p` (Make Directory - Parents) command creates a target directory and all necessary parent directories leading up to it. 
+- **Why:** Essential for scripting and Dockerfile configuration. It allows for the instantaneous scaffolding of project environments without manual, step-by-step navigation.
+
+### 2. The Commands
+- **Standard (Fails if parent is missing):** `mkdir projects/gemini/backend`
+- **Parent Flag (Succeeds instantly):** `mkdir -p projects/gemini/backend/api/src`
+
+### 3. The Automation Benefit
+In an automation script, running standard `mkdir folder` twice causes the script to halt and throw a fatal error because the folder already exists. Running `mkdir -p folder` twice is perfectly safe; it simply verifies the folder exists and silently moves on to the next task.
